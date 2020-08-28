@@ -1,11 +1,14 @@
 <?php
-class Dashboard extends CI_Controller
+class Dashboard extends MY_Controller
 {
-    public function index()
-    {
-        $this->load->view('admin/templateBackend/header');
-        $this->load->view('admin/templateBackend/sidebar');
-        $this->load->view('admin/dashboard');
-        $this->load->view('admin/templateBackend/footer');
-    }
+	public function index()
+	{
+		if (!$this->session->userdata('username')) {
+			$this->session->set_flashdata('error', 'Anda Harus Login.');
+			redirect('admin/login');
+		} else {
+			// $this->load->view('admin/login');
+			$this->view_backend('admin/dashboard');
+		}
+	}
 }

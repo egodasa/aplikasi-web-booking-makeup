@@ -1,17 +1,54 @@
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-        <div class="row justify-content-center">
-            <div class="col-xl-7 col-lg-9 text-center">
-                <h1>One Page Bootstrap Website Template</h1>
-                <h2>We are team of talanted designers</h2>
-            </div>
-        </div>
-        <div class="text-center">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-        </div>
 
-        <div class="row icon-boxes">
+<?php
+if ($this->session->flashdata('pesan') == TRUE) {
+	$pesan = $this->session->flashdata('pesan');
+?>
+	<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+	<script type="text/javascript">
+		Swal.fire(
+			'Berhasil!',
+			'<?= $pesan ?>',
+			'success'
+		)
+	</script>
+<?php }
+if ($this->session->flashdata('error') == TRUE) {
+	$error = $this->session->flashdata('error');
+?>
+	<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+	<script type="text/javascript">
+		Swal.fire({
+			icon: 'error',
+			title: 'Oops...',
+			text: '<?= $error ?>'
+		})
+	</script>
+<?php
+}
+?>
+
+<section id="hero" class="d-flex align-items-center" style="height: 80%;">
+	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+
+		<div class="row justify-content-center">
+			<div>
+				<a href="#pricing">Harga</a> |
+				<a href="#about">Hello</a> |
+				<a href="#contact">Contact</a>
+			</div>
+			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
+				<h1>Selamat Datang</h1>
+				<h2>Ratih MakeUp Arts</h2>
+			</div>
+		</div>
+		<!-- <div class="text-center">
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        </div> -->
+
+		<!-- <div class="row icon-boxes">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-stack-line"></i></div>
@@ -44,14 +81,66 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-</section><!-- End Hero -->
+        </div> -->
+	</div>
+</section>
+<!-- End Hero -->
 
 <main id="main">
+	<!-- ======= Cta Section ======= -->
+	<section id="cta" class="cta">
+		<div class="container" data-aos="zoom-in">
+			<div class="text-center">
+				<h3>Paket Make Up</h3>
+				<hr>
+				<p> Disini kami hadirkan beberapa paket makeup yang mungkin ingin Anda butuhkan.</p>
+			</div>
+		</div>
+	</section><!-- End Cta Section -->
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+	<?php foreach ($makeup as $mp) : ?>
+		<section id="pricing" class="pricing">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2><?= $mp->nm_makeup ?></h2>
+				</div>
+
+				<div class="row">
+					<?php foreach ($mp->paket as $paket) : ?>
+
+						<div class="col-lg-4 col-md-6 mt-4 mt-md-0 mb-5" data-aos="zoom-in" data-aos-delay="100">
+							<div class="box featured" style="height: 30rem;">
+								<h1><?= $paket->nm_paket ?></h1>
+								<h4><sup>Rp.</sup><?= number_format($paket->harga_paket, '0', ',', '.') ?></h4>
+								<?php if ($paket->biaya_dp > 0) { ?>
+									<h5>DP : <sup>Rp.</sup><?= number_format($paket->biaya_dp, '0', ',', '.') ?></h5>
+								<?php } else { ?>
+									<small></small>
+								<?php } ?>
+								<ul>
+									<?php
+									$list_fitur = explode("<br>", $paket->deskripsi);
+									foreach ($list_fitur as $fitur) :
+									?>
+										<li><?= $fitur ?></li>
+									<?php endforeach; ?>
+								</ul>
+								<div class="btn-wrap">
+									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Buy Now</a>
+								</div>
+							</div>
+						</div>
+					<?php endforeach; ?>
+
+				</div>
+
+			</div>
+		</section><!-- End Pricing Section -->
+
+	<?php endforeach; ?>
+	<!-- ======= About Section ======= -->
+	<!-- <section class="about">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -82,10 +171,11 @@
             </div>
 
         </div>
-    </section><!-- End About Section -->
+    </section> -->
+	<!-- End About Section -->
 
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg">
+	<!-- ======= Counts Section ======= -->
+	<!-- <section id="counts" class="counts section-bg">
         <div class="container">
 
             <div class="row justify-content-end">
@@ -121,45 +211,41 @@
             </div>
 
         </div>
-    </section><!-- End Counts Section -->
+    </section> -->
+	<!-- End Counts Section -->
 
-    <!-- ======= About Video Section ======= -->
-    <section id="about-video" class="about-video">
-        <div class="container" data-aos="fade-up">
+	<!-- ======= About Video Section ======= -->
+	<section id="about" class="about-video">
+		<div class="container" data-aos="fade-up">
 
-            <div class="row">
+			<div class="row">
 
-                <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
-                    <img src="<?php echo base_url('assets/assetsfe') ?>/img/about-video.jpg" class="img-fluid" alt="">
-                    <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-                </div>
+				<div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100" align=center>
+					<img src="<?php echo base_url('assets/upload') ?>/Foto.png" class="img-fluid" alt="">
+					<!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
+				</div>
 
-                <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                    <p class="font-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                    </p>
-                    <ul>
-                        <li><i class="bx bx-check-double"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                        <li><i class="bx bx-check-double"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                        <li><i class="bx bx-check-double"></i> Voluptate repellendus pariatur reprehenderit corporis sint.</li>
-                        <li><i class="bx bx-check-double"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                    </ul>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum
-                    </p>
-                </div>
+				<div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+					<h2>Biodata MUA</h2>
+					<ul>
+						<li><i class="bx bx-check-double"></i> Nama : Ratih Wahyuni</li>
+						<li><i class="bx bx-check-double"></i> Tempat / Tgl. Lahir : Sulit Air / 25-Desember 1999</li>
+						<li><i class="bx bx-check-double"></i> Asal : Sulit Air, Solok, Sumatera Barat</li>
+						<li><i class="bx bx-check-double"></i> Alamat Studio : Pondokan Kasih Koto Tuo</li>
+						<li><i class="bx bx-check-double"></i> Kontak WA : 082390156897</li>
+						<li><i class="bx bx-check-double"></i> Nama Instagram : @ratih_makeuparts</li>
+						<li><i class="bx bx-check-double"></i> Nomor Tel. : 0942364735</li>
+						<li><i class="bx bx-check-double"></i> Email : rwahyuniislami@gmail.com</li>
+					</ul>
+				</div>
 
-            </div>
+			</div>
 
-        </div>
-    </section><!-- End About Video Section -->
+		</div>
+	</section><!-- End About Video Section -->
 
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients section-bg">
+	<!-- ======= Clients Section ======= -->
+	<!-- <section id="clients" class="clients section-bg">
         <div class="container">
 
             <div class="row">
@@ -191,10 +277,10 @@
             </div>
 
         </div>
-    </section><!-- End Clients Section -->
+    </section>End Clients Section -->
 
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+	<!-- ======= Testimonials Section ======= -->
+	<!-- <section id="testimonials" class="testimonials">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -262,14 +348,14 @@
             </div>
 
         </div>
-    </section><!-- End Testimonials Section -->
+    </section>End Testimonials Section -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
+	<!-- ======= Services Section ======= -->
+	<!-- <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Sevices</h2>
+                <h2>Make Up Kategori</h2>
                 <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
             </div>
 
@@ -313,19 +399,6 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-yellow">
-                        <div class="icon">
-                            <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
-                            </svg>
-                            <i class="bx bx-layer"></i>
-                        </div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box iconbox-red">
                         <div class="icon">
@@ -352,177 +425,55 @@
                     </div>
                 </div>
 
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-yellow">
+                        <div class="icon">
+                            <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
+                            </svg>
+                            <i class="bx bx-layer"></i>
+                        </div>
+                        <h4><a href="">Wedding</a></h4>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-yellow">
+                        <div class="icon">
+                            <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
+                            </svg>
+                            <i class="bx bx-layer"></i>
+                        </div>
+                        <h4><a href="">Wisuda</a></h4>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-yellow">
+                        <div class="icon">
+                            <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
+                            </svg>
+                            <i class="bx bx-layer"></i>
+                        </div>
+                        <h4><a href="">Perpisahan</a></h4>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    </div>
+                </div>
             </div>
 
         </div>
-    </section><!-- End Sevices Section -->
+    </section> -->
+	<!-- End Sevices Section -->
 
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-            <div class="text-center">
-                <h3>Call To Action</h3>
-                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a class="cta-btn" href="#">Call To Action</a>
-            </div>
-        </div>
-    </section><!-- End Cta Section -->
+	<!-- ======= Portfolio Section ======= -->
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-        <div class="container" data-aos="fade-up">
 
-            <div class="section-title">
-                <h2>Portfolio</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
-
-            <div class="row" data-aos="fade-up" data-aos-delay="150">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="portfolio-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-card">Card</li>
-                        <li data-filter=".filter-web">Web</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>App 1</h4>
-                            <p>App</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Web 3</h4>
-                            <p>Web</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>App 2</h4>
-                            <p>App</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Card 2</h4>
-                            <p>Card</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Web 2</h4>
-                            <p>Web</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>App 3</h4>
-                            <p>App</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Card 1</h4>
-                            <p>Card</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Card 3</h4>
-                            <p>Card</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="<?php echo base_url('assets/assetsfe') ?>/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Web 3</h4>
-                            <p>Web</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Portfolio Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+	<!-- ======= Team Section ======= -->
+	<!-- <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -607,77 +558,10 @@
             </div>
 
         </div>
-    </section><!-- End Team Section -->
+    </section>End Team Section -->
 
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>Pricing</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
-
-            <div class="row">
-
-                <div class="col-lg-4 col-md-6" data-aos="zoom-im" data-aos-delay="100">
-                    <div class="box">
-                        <h3>Free</h3>
-                        <h4><sup>$</sup>0<span> / month</span></h4>
-                        <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li class="na">Pharetra massa</li>
-                            <li class="na">Massa ultricies mi</li>
-                        </ul>
-                        <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="box featured">
-                        <h3>Business</h3>
-                        <h4><sup>$</sup>19<span> / month</span></h4>
-                        <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li>Pharetra massa</li>
-                            <li class="na">Massa ultricies mi</li>
-                        </ul>
-                        <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="box">
-                        <h3>Developer</h3>
-                        <h4><sup>$</sup>29<span> / month</span></h4>
-                        <ul>
-                            <li>Aida dere</li>
-                            <li>Nec feugiat nisl</li>
-                            <li>Nulla at volutpat dola</li>
-                            <li>Pharetra massa</li>
-                            <li>Massa ultricies mi</li>
-                        </ul>
-                        <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Pricing Section -->
-
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+	<!-- ======= Frequently Asked Questions Section ======= -->
+	<!-- <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -736,81 +620,59 @@
             </div>
 
         </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section> -->
+	<!-- End Frequently Asked Questions Section -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
+	<!-- ======= Contact Section ======= -->
+	<section id="contact" class="contact">
+		<div class="container" data-aos="fade-up">
+			<div class="section-title">
+				<h2>Kontak</h2>
+			</div>
+			<div class="row mt-5">
 
-            <div class="section-title">
-                <h2>Contact</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
+				<div class="col-md-3">
+					<div class="info">
+						<div class="email">
+							<i class="icofont-envelope"></i>
+							<h4>Email:</h4>
+							<p>rwahyuniislami@gmail.com</p>
+						</div>
+					</div>
+				</div>
 
-            <div>
-                <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-            </div>
+				<div class="col-md-3">
+					<div class="info">
+						<div class="phone">
+							<i class="icofont-phone"></i>
+							<h4>Telepon:</h4>
+							<p>0942364735</p>
+						</div>
+					</div>
+				</div>
 
-            <div class="row mt-5">
+				<div class="col-md-3">
+					<div class="info">
+						<div class="phone">
+							<i class="icofont-whatsapp"></i>
+							<h4>Whatsapp:</h4>
+							<p>082390156897</p>
+						</div>
+					</div>
+				</div>
 
-                <div class="col-lg-4">
-                    <div class="info">
-                        <div class="address">
-                            <i class="icofont-google-map"></i>
-                            <h4>Location:</h4>
-                            <p>A108 Adam Street, New York, NY 535022</p>
-                        </div>
+				<div class="col-md-3">
+					<div class="info">
+						<div class="phone">
+							<i class="icofont-instagram"></i>
+							<h4>Instagram:</h4>
+							<p>@ratih_makeuparts</p>
+						</div>
+					</div>
+				</div>
 
-                        <div class="email">
-                            <i class="icofont-envelope"></i>
-                            <h4>Email:</h4>
-                            <p>info@example.com</p>
-                        </div>
-
-                        <div class="phone">
-                            <i class="icofont-phone"></i>
-                            <h4>Call:</h4>
-                            <p>+1 5589 55488 55s</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-8 mt-5 mt-lg-0">
-
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="form-row">
-                            <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validate"></div>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                <div class="validate"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validate"></div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                            <div class="validate"></div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Contact Section -->
+			</div>
+		</div>
+	</section><!-- End Contact Section -->
 
 </main><!-- End #main -->
