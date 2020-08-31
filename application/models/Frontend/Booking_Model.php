@@ -182,4 +182,8 @@ class Booking_Model extends CI_Model
 			tb_pengguna.id_pengguna where tb_booking.status='Sudah Lunas'")->result();
 		}
 	}
+	
+	public function cekBatasMaksimalBooking($id_makeup, $tanggal)
+	{
+	}
 }
