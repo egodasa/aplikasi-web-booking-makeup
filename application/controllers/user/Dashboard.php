@@ -48,13 +48,24 @@ class Dashboard extends MY_Controller
 
     public function booking_tambah()
     {
-        if (!$this->session->userdata('username')) {
+        if (!$this->session->userdata('username'))
+        {
             $this->session->set_flashdata('error', 'Anda Harus Login Terlebih Dahulu.');
             redirect('register');
-        } else {
-            $this->bookingModel->save($_POST);
-            $this->session->set_flashdata('pesan', 'Booking Berhasil dilakukan.');
-            redirect('user/index');
+        }
+        else
+        {
+            if($this->bookingModel->apakahBisaBookingPaket($_POST['id_paket'], $_POST['tgl_makeup']))
+            {
+                $this->bookingModel->save($_POST);
+                $this->session->set_flashdata('pesan', 'Booking Berhasil dilakukan.');
+                redirect('user/index');
+            }
+            else
+            {
+                $this->session->set_flashdata('pesan', 'Tanggal Booking sudah penuh. Silahkan pilih tanggal lain!');
+                $this->booking($_POST['id_paket']);
+            }
         }
     }
 

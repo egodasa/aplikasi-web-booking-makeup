@@ -40,10 +40,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Tanggal Booking</label>
-                            <input type="date" class="form-control" name="tgl_booking">
-                        </div>
-                        <div class="form-group">
                             <label for="">Tanggal Make Up</label>
                             <input type="date" class="form-control" name="tgl_makeup">
                         </div>
