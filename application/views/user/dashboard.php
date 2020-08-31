@@ -35,9 +35,9 @@ if ($this->session->flashdata('error') == TRUE) {
 
 		<div class="row justify-content-center">
 			<div>
-				<a href="#pricing">Harga</a> |
-				<a href="#about">Hello</a> |
-				<a href="#contact">Contact</a>
+				<a href="#pricing">Tarif</a> |
+				<a href="#about">Tentang Kami</a> |
+				<a href="#contact">Kontak Kami</a>
 			</div>
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
 				<h1>Selamat Datang</h1>
@@ -127,7 +127,7 @@ if ($this->session->flashdata('error') == TRUE) {
 									<?php endforeach; ?>
 								</ul>
 								<div class="btn-wrap">
-									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Buy Now</a>
+									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
 								</div>
 							</div>
 						</div>
