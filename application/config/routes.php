@@ -1,54 +1,61 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/user_guide/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// Frontend
+$route['user/index']['GET'] = 'user/Dashboard/index';
+$route['karya']['GET'] = 'user/Dashboard/karya';
+$route['register']['GET'] = 'user/Dashboard/register';
+$route['register_tambah']['POST'] = 'user/Dashboard/register_tambah';
+$route['booking/(:num)']['GET'] = 'user/Dashboard/booking/$1';
+$route['booking_tambah']['POST'] = 'user/Dashboard/booking_tambah';
+$route['riwayat']['GET'] = 'user/Dashboard/riwayat';
+$route['pembayaran']['POST'] = 'user/Dashboard/pembayaran';
+
+$route['login']['POST'] = 'user/Auth_User/login';
+$route['logout']['GET'] = 'user/Auth_User/logout';
+
+// Backend
+
+$route['admin']['GET'] = 'admin/Dashboard/index';
+$route['admin/login']['GET'] = 'admin/Login/login_admin';
+$route['admin/login_aksi']['POST'] = 'admin/Login/login_aksi';
+// $route['admin/logout_aksi']['GET'] = 'admin/Login/logout_aksi';
+
+// Makeup
+$route['admin/makeup']['GET'] = 'admin/Makeup/index';
+$route['admin/makeup_tambah']['POST'] = 'admin/Makeup/makeup_tambah';
+$route['admin/makeup_edit/(:num)']['GET'] = 'admin/Makeup/makeup_edit/$1';
+$route['admin/makeup_edit_aksi']['POST'] = 'admin/Makeup/makeup_edit_aksi';
+$route['admin/makeup_hapus/(:num)']['GET'] = 'admin/Makeup/makeup_hapus_aksi/$1';
+
+// Paket Makeup
+$route['admin/paket']['GET'] = 'admin/Paket_Makeup/index';
+$route['admin/paket_tambah']['POST'] = 'admin/Paket_Makeup/paket_tambah';
+$route['admin/paket_edit/(:num)']['GET'] = 'admin/Paket_Makeup/paket_edit/$1';
+$route['admin/paket_edit_aksi']['POST'] = 'admin/Paket_Makeup/paket_edit_aksi';
+$route['admin/paket_hapus/(:num)']['GET'] = 'admin/Paket_Makeup/paket_hapus_aksi/$1';
+
+// Hasil Karya
+$route['admin/karya']['GET'] = 'admin/Hasil_Karya/index';
+$route['admin/karya_tambah']['POST'] = 'admin/Hasil_Karya/karya_tambah';
+$route['admin/karya_edit/(:num)']['GET'] = 'admin/Hasil_karya/karya_edit/$1';
+$route['admin/karya_edit_aksi']['POST'] = 'admin/Hasil_karya/karya_edit_aksi';
+$route['admin/karya_hapus/(:num)']['GET'] = 'admin/Hasil_karya/karya_hapus_aksi/$1';
+
+// Tarif
+$route['admin/tarif']['GET'] = 'admin/Tarif/index';
+$route['admin/tarif_tambah']['POST'] = 'admin/Tarif/tambah_tarif';
+$route['admin/tarif_hapus/(:num)']['GET'] = 'admin/Tarif/hapus_tarif/$1';
+
+// Booking
+$route['admin/booking']['GET'] = 'admin/Booking/index';
+$route['konfirmasi']['POST'] = 'admin/Booking/konfirmasi';
+
+// Laporan
+$route['admin/laporan']['GET'] = 'admin/Laporan/index';
+$route['admin/print_laporan']['POST'] = 'admin/Laporan/printLaporan';
+$route['admin/filter_laporan']['GET'] = 'admin/Laporan/filterLaporan';
