@@ -11,6 +11,7 @@
 				<ul>
 					<li class="active"><a href="<?php echo base_url('user/index') ?>">Beranda</a></li>
 					<li><a href="<?php echo base_url('karya') ?>">Hasil Karya</a></li>
+					<li><a href="<?php echo base_url('biodata') ?>">Biodata</a></li>
 					<?php if (!$this->session->userdata('username')) { ?>
 						<li><a href="<?php echo base_url('register') ?>">Daftar</a></li>
 				</ul>

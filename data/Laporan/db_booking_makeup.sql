@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2020 at 02:55 PM
+-- Generation Time: Aug 31, 2020 at 08:15 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -28,17 +28,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `tb_admin` (
   `id_admin` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `nama_admin` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `nama_admin` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `username`, `password`, `nama_admin`) VALUES
-(2, 'admin', 'admin', 'admin');
+(2, 'admin', 'admin', 'admin'),
+(3, 'ratihmua', 'ratihmua', 'Ratih Wahyuni Islami');
 
 -- --------------------------------------------------------
 
@@ -52,24 +53,21 @@ CREATE TABLE IF NOT EXISTS `tb_booking` (
   `id_paket` int(11) NOT NULL,
   `tgl_booking` datetime NOT NULL,
   `tgl_makeup` datetime NOT NULL,
-  `nama_booking` varchar(100) NOT NULL,
-  `alamat_booking` varchar(255) NOT NULL,
+  `nama_booking` varchar(50) NOT NULL,
+  `alamat_booking` text NOT NULL,
   `id_kota` int(11) NOT NULL,
   `status` enum('Belum Bayar DP','Sudah Bayar DP','Sudah Lunas','Dibatalkan','Menunggu Konfirmasi') NOT NULL DEFAULT 'Belum Bayar DP',
   `keterangan` text NOT NULL,
   `total_bayar` int(11) NOT NULL,
   `sudah_bayar` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_booking`
 --
 
 INSERT INTO `tb_booking` (`id_booking`, `id_pengguna`, `id_paket`, `tgl_booking`, `tgl_makeup`, `nama_booking`, `alamat_booking`, `id_kota`, `status`, `keterangan`, `total_bayar`, `sudah_bayar`) VALUES
-(4, 1, 7, '2012-02-10 00:00:00', '1975-05-10 00:00:00', 'sozaky', 'Quo est enim optio ', 2, 'Sudah Lunas', 'Dolor deserunt volup', 0, 0),
-(5, 2, 13, '2015-11-23 00:00:00', '2000-03-26 00:00:00', 'pekyxit', 'Adipisicing sed cons', 2, 'Dibatalkan', 'Inventore voluptatem', 0, 0),
-(6, 2, 4, '2003-12-22 00:00:00', '2001-09-02 00:00:00', 'pixegihe', 'Ullam quis magnam ea', 2, 'Belum Bayar DP', 'Sed architecto neces', 0, 0),
-(7, 2, 6, '2006-12-23 00:00:00', '1994-01-16 00:00:00', 'secewu', 'Incidunt labore lab', 2, 'Belum Bayar DP', 'Non voluptatem non ', 0, 0);
+(10, 2, 4, '2020-08-01 00:00:00', '2020-08-11 00:00:00', 'Aditya', 'Padang', 2, 'Sudah Lunas', 'Keterangan', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -80,20 +78,19 @@ INSERT INTO `tb_booking` (`id_booking`, `id_pengguna`, `id_paket`, `tgl_booking`
 CREATE TABLE IF NOT EXISTS `tb_bukti_bayar` (
   `id_bukti` int(11) NOT NULL,
   `id_booking` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `no_rekening` varchar(100) NOT NULL,
-  `bank` varchar(50) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `no_rekening` varchar(25) NOT NULL,
+  `bank` varchar(20) NOT NULL,
   `status_bukti` enum('Pembayaran Diterima','Pembayaran Ditolak','Menunggu Konfirmasi') DEFAULT 'Menunggu Konfirmasi',
-  `bukti_foto` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `bukti_foto` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_bukti_bayar`
 --
 
 INSERT INTO `tb_bukti_bayar` (`id_bukti`, `id_booking`, `nama`, `no_rekening`, `bank`, `status_bukti`, `bukti_foto`) VALUES
-(1, 4, 'bylevad', 'dydysi', 'BRI', 'Pembayaran Diterima', '19.png'),
-(2, 5, 'sesihu', 'wybuvy', 'BRI', 'Menunggu Konfirmasi', 'transaksi3.png');
+(3, 10, 'Aditya Agusta', '7874', 'BRI', 'Pembayaran Diterima', 'transaksi.png');
 
 -- --------------------------------------------------------
 
@@ -103,25 +100,18 @@ INSERT INTO `tb_bukti_bayar` (`id_bukti`, `id_booking`, `nama`, `no_rekening`, `
 
 CREATE TABLE IF NOT EXISTS `tb_hasil_karya` (
   `id_karya` int(11) NOT NULL,
-  `nm_karya` varchar(255) NOT NULL,
+  `nm_karya` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
   `foto` text NOT NULL,
   `id_makeup` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_hasil_karya`
 --
 
 INSERT INTO `tb_hasil_karya` (`id_karya`, `nm_karya`, `deskripsi`, `foto`, `id_makeup`) VALUES
-(4, 'Wedding', '-', 'akad_aisyah.jpeg', 4),
-(5, 'Wedding', '-', 'akad_dea.jpeg', 4),
-(6, 'Wedding', '-', 'chcra.jpeg', 4),
-(7, 'Wedding', '-', 'cindi.jpeg', 4),
-(10, 'Wisuda', '-', 'MAKEUP_20190423130720_save2.jpg', 5),
-(12, 'Wisuda', '-', 'MAKEUP_2019093018255162_save.jpg', 5),
-(13, 'Wisuda', '-', 'perpisahaan_11.jpeg', 5),
-(14, 'Perpisahan', '-', 'MAKEUP_20190423123826_save.jpg', 6);
+(15, 'Wedding', '-', 'akad_dea.jpeg', 4);
 
 -- --------------------------------------------------------
 
@@ -150,7 +140,7 @@ INSERT INTO `tb_kota` (`id_kota`, `nm_kota`, `tarif`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tb_makeup` (
   `id_makeup` int(11) NOT NULL,
-  `nm_makeup` varchar(100) NOT NULL,
+  `nm_makeup` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -207,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `tb_pengguna` (
   `password` text NOT NULL,
   `level` enum('Admin','Klien') NOT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `nohp` varchar(20) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -279,22 +269,22 @@ ALTER TABLE `tb_pengguna`
 -- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_booking`
 --
 ALTER TABLE `tb_booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_bukti_bayar`
 --
 ALTER TABLE `tb_bukti_bayar`
-  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_hasil_karya`
 --
 ALTER TABLE `tb_hasil_karya`
-  MODIFY `id_karya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id_karya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tb_kota`
 --
