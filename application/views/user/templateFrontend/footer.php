@@ -91,6 +91,35 @@
 <!-- Template Main JS File -->
 <script src="<?php echo base_url('assets/assetsfe') ?>/js/main.js"></script>
 
+<?php
+if ($this->session->flashdata('pesan') == TRUE) {
+    $pesan = $this->session->flashdata('pesan');
+?>
+    
+    <script type="text/javascript">
+        Swal.fire(
+            'Berhasil!',
+            '<?= $pesan ?>',
+            'success'
+        )
+    </script>
+<?php }
+if (!empty($this->session->flashdata('error'))) {
+    $error = $this->session->flashdata('error');
+?>
+    
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '<?= $error ?>'
+        })
+    </script>
+<?php
+    $this->session->set_flashdata('error', '');
+}
+?>
+
 </body>
 
 </html>

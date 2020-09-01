@@ -185,17 +185,14 @@ class Booking_Model extends CI_Model
 	
 	public function apakahBisaBookingPaket($id_paket, $tanggal)
 	{
-		$booking = $this->db->query("Select
-					    Count(tb_booking.id_booking) As banyak_booking, 
-					tb_paket_makeup.batas_booking_per_hari 
-					From
-					    tb_paket_makeup Inner Join
-					    tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
-					    tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
-					WHERE tb_paket_makeup.id_paket = $id_paket 
-					AND DATE(tb_booking.tgl_makeup) = '$tanggal' 
-					and ((tb_booking.status = 'Belum Bayar DP' OR tb_booking.status) 
-					AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 1) OR tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')")->row();
-		return $booking->batas_booking_per_hari > $booking->banyak_booking; 
+		$booking = $this->db->query("Select Count(tb_booking.id_booking) As banyak_booking,
+				tb_paket_makeup.batas_booking_per_hari 
+				 From 
+				tb_paket_makeup Inner Join 
+				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
+				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3 AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket) 
+				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas') AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket)")->row();
+		return $booking->banyak_booking+1 <= $booking->batas_booking_per_hari; 
 	}
 }

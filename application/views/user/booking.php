@@ -16,6 +16,7 @@
                         <div class="form-group">
                             <label for="">Tanggal Make Up</label>
                             <input type="date" class="form-control" name="tgl_makeup" value="<?=$tanggal?>">
+                            <small><b>Pilih Tanggal Akad (Khusus Makeup Wedding Paket 2 dan Paket 3)</b></small>
                         </div>
                         <div class="form-group">
                             <label for="">Nama Booking</label>
@@ -37,7 +38,8 @@
                         </div>
                         <div class="form-group">
                             <label for="">Keterangan</label>
-                            <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="keterangan" id="" cols="30" rows="5" class="form-control"></textarea>
+                            <small><b>(Tuliskan tanggal akad dan tanggal resepsi jika paket yang dipilih makeup wedding paket 2 atau 3)</b></small>
                         </div>
                         <div class="form-group">
                             <label for="">No. Handphone</label>
