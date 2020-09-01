@@ -26,6 +26,11 @@
 		<hr class="sidebar-divider">
 
 		<li class="nav-item">
+			<a class="nav-link" href="<?php echo base_url('admin/data') ?>">
+				<i class="fas fa-fw fa-table"></i>
+				<span>Admin </span></a>
+		</li>
+		<li class="nav-item">
 			<a class="nav-link" href="<?php echo base_url('admin/makeup') ?>">
 				<i class="fas fa-fw fa-shopping-cart"></i>
 				<span>Make Up </span></a>
@@ -54,6 +59,11 @@
 			<a class="nav-link" href="<?php echo base_url('admin/laporan') ?>">
 				<i class="fas fa-fw fa-table"></i>
 				<span>Laporan</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="<?php echo base_url('admin/user') ?>">
+				<i class="fas fa-fw fa-table"></i>
+				<span>User</span></a>
 		</li>
 
 		<!-- Divider -->

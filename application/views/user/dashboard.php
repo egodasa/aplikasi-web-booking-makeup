@@ -34,11 +34,6 @@ if ($this->session->flashdata('error') == TRUE) {
 	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
 		<div class="row justify-content-center">
-			<div>
-				<a href="#pricing">Harga</a> |
-				<a href="#about">Hello</a> |
-				<a href="#contact">Contact</a>
-			</div>
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
 				<h1>Selamat Datang</h1>
 				<h2>Ratih MakeUp Arts</h2>
@@ -214,35 +209,6 @@ if ($this->session->flashdata('error') == TRUE) {
     </section> -->
 	<!-- End Counts Section -->
 
-	<!-- ======= About Video Section ======= -->
-	<section id="about" class="about-video">
-		<div class="container" data-aos="fade-up">
-
-			<div class="row">
-
-				<div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100" align=center>
-					<img src="<?php echo base_url('assets/upload') ?>/Foto.png" class="img-fluid" alt="">
-					<!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
-				</div>
-
-				<div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-					<h2>Biodata MUA</h2>
-					<ul>
-						<li><i class="bx bx-check-double"></i> Nama : Ratih Wahyuni</li>
-						<li><i class="bx bx-check-double"></i> Tempat / Tgl. Lahir : Sulit Air / 25-Desember 1999</li>
-						<li><i class="bx bx-check-double"></i> Asal : Sulit Air, Solok, Sumatera Barat</li>
-						<li><i class="bx bx-check-double"></i> Alamat Studio : Pondokan Kasih Koto Tuo</li>
-						<li><i class="bx bx-check-double"></i> Kontak WA : 082390156897</li>
-						<li><i class="bx bx-check-double"></i> Nama Instagram : @ratih_makeuparts</li>
-						<li><i class="bx bx-check-double"></i> Nomor Tel. : 0942364735</li>
-						<li><i class="bx bx-check-double"></i> Email : rwahyuniislami@gmail.com</li>
-					</ul>
-				</div>
-
-			</div>
-
-		</div>
-	</section><!-- End About Video Section -->
 
 	<!-- ======= Clients Section ======= -->
 	<!-- <section id="clients" class="clients section-bg">
@@ -623,56 +589,5 @@ if ($this->session->flashdata('error') == TRUE) {
     </section> -->
 	<!-- End Frequently Asked Questions Section -->
 
-	<!-- ======= Contact Section ======= -->
-	<section id="contact" class="contact">
-		<div class="container" data-aos="fade-up">
-			<div class="section-title">
-				<h2>Kontak</h2>
-			</div>
-			<div class="row mt-5">
-
-				<div class="col-md-3">
-					<div class="info">
-						<div class="email">
-							<i class="icofont-envelope"></i>
-							<h4>Email:</h4>
-							<p>rwahyuniislami@gmail.com</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="info">
-						<div class="phone">
-							<i class="icofont-phone"></i>
-							<h4>Telepon:</h4>
-							<p>0942364735</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="info">
-						<div class="phone">
-							<i class="icofont-whatsapp"></i>
-							<h4>Whatsapp:</h4>
-							<p>082390156897</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="info">
-						<div class="phone">
-							<i class="icofont-instagram"></i>
-							<h4>Instagram:</h4>
-							<p>@ratih_makeuparts</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section><!-- End Contact Section -->
 
 </main><!-- End #main -->

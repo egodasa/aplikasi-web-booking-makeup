@@ -14,11 +14,19 @@ $route['booking/(:num)']['GET'] = 'user/Dashboard/booking/$1';
 $route['booking_tambah']['POST'] = 'user/Dashboard/booking_tambah';
 $route['riwayat']['GET'] = 'user/Dashboard/riwayat';
 $route['pembayaran']['POST'] = 'user/Dashboard/pembayaran';
+$route['biodata']['GET'] = 'user/Dashboard/biodata';
 
 $route['login']['POST'] = 'user/Auth_User/login';
 $route['logout']['GET'] = 'user/Auth_User/logout';
 
 // Backend
+
+// Admin
+$route['admin/data']['GET'] = 'admin/Admin/index';
+$route['admin/admin_tambah']['POST'] = 'admin/Admin/admin_tambah';
+$route['admin/admin_edit/(:num)']['GET'] = 'admin/Admin/admin_edit/$1';
+$route['admin/admin_edit_aksi']['POST'] = 'admin/Admin/admin_edit_aksi';
+$route['admin/admin_hapus/(:num)']['GET'] = 'admin/Admin/admin_hapus_aksi/$1';
 
 $route['admin']['GET'] = 'admin/Dashboard/index';
 $route['admin/login']['GET'] = 'admin/Login/login_admin';
@@ -59,3 +67,7 @@ $route['konfirmasi']['POST'] = 'admin/Booking/konfirmasi';
 $route['admin/laporan']['GET'] = 'admin/Laporan/index';
 $route['admin/print_laporan']['POST'] = 'admin/Laporan/printLaporan';
 $route['admin/filter_laporan']['GET'] = 'admin/Laporan/filterLaporan';
+
+// User
+$route['admin/user']['GET'] = 'admin/User/index';
+$route['admin/user_hapus/(:num)']['GET'] = 'admin/User/user_hapus/$1';
