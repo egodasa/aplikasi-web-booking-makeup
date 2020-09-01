@@ -41,6 +41,21 @@ class Dashboard extends MY_Controller
 
     public function booking($id)
     {
+        $data['tombol'] = false;
+        $data['tanggal'] = null;
+        if(!empty($_GET['tanggal']))
+        {
+            $data['tanggal'] = $_GET['tanggal'];
+            if($this->bookingModel->apakahBisaBookingPaket($_GET['id_paket'], $_GET['tanggal']))
+            {
+                $data['tombol'] = true;
+            }
+            else
+            {
+                $this->session->set_flashdata('error', 'Tanggal makeup yang Anda pilih sudah penuh! Silahkan pilih tanggal lain');
+            }
+        }
+        $data['id'] = $id;
         $data['paket'] = $this->paketMakeupModel->getById($id);
         $data['tarif'] = $this->paketMakeupModel->getKota();
         $this->view_frontend('user/booking', $data);

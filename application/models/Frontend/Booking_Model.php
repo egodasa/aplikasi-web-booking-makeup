@@ -55,10 +55,10 @@ class Booking_Model extends CI_Model
 		$data['nama_booking'] = $post["nama_booking"];
 		$data['alamat_booking'] = $post["alamat_booking"];
 		$data['id_kota'] = $post["id_kota"];
-		// $data['status'] = $post["status"];
 		$data['keterangan'] = $post["keterangan"];
-		// $data['total_bayar'] = $post["total_bayar"];
-		// $data['sudah_bayar'] = $post["sudah_bayar"];
+		$data['total_bayar'] = $post["total_bayar"];
+		$data['dp'] = $post["dp"];
+		$data['sudah_bayar'] = $post["sudah_bayar"];
 		return $this->db->insert($this->_table, $data);
 	}
 
@@ -196,6 +196,6 @@ class Booking_Model extends CI_Model
 					AND DATE(tb_booking.tgl_makeup) = '$tanggal' 
 					and ((tb_booking.status = 'Belum Bayar DP' OR tb_booking.status) 
 					AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 1) OR tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')")->row();
-		return $booking['batas_booking_per_hari'] > $booking['banyak_booking']; 
+		return $booking->batas_booking_per_hari > $booking->banyak_booking; 
 	}
 }

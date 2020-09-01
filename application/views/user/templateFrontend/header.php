@@ -24,7 +24,7 @@
 	<link href="<?php echo base_url('assets/assetsfe') ?>/vendor/venobox/venobox.css" rel="stylesheet">
 	<link href="<?php echo base_url('assets/assetsfe') ?>/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('assets/assetsfe') ?>/vendor/aos/aos.css" rel="stylesheet">
-
+	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 	<!-- Template Main CSS File -->
 	<link href="<?php echo base_url('assets/assetsfe') ?>/css/style.css" rel="stylesheet">
 

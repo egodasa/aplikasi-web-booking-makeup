@@ -3,7 +3,7 @@
 	<header id="header" class="fixed-top">
 		<div class="container d-flex align-items-center">
 
-			<h1 class="logo mr-auto"><a href="#">Hello Make Up</a></h1>
+			<h1 class="logo mr-auto"><a href="#">Ratih MakeUp</a></h1>
 			<!-- Uncomment below if you prefer to use an image logo -->
 			<!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -17,7 +17,7 @@
 			</nav>
 			<button class="get-started-btn scrollto" type="button" data-toggle="modal" data-target="#login">Masuk</button>
 		<?php } else { ?>
-			<li><a href="<?php echo base_url('riwayat') ?>">Jadwal</a></li>
+			<li><a href="<?php echo base_url('riwayat') ?>">Riwayat Booking</a></li>
 			<a href="<?php echo base_url('logout') ?>" class="get-started-btn scrollto" style="color: white;">Keluar</a>
 		<?php } ?>
 		</div>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="form-group">
 							<label for="">Password</label>
-							<input type="text" class="form-control" name="password">
+							<input type="password" class="form-control" name="password">
 						</div>
 						<button class="btn btn-primary" type="submit">Masuk</button>
 					</form>
