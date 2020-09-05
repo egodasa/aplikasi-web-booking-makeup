@@ -5,6 +5,7 @@
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">Nama</th>
+				<th scope="col">Tanggal Booking</th>
 				<th scope="col">No. Rekening</th>
 				<th scope="col">Harga Paket</th>
 				<th scope="col">Tarif</th>
@@ -20,11 +21,12 @@
 					<?php $total = $bk->harga_paket + $bk->tarif; ?>
 					<th scope="row"><?php echo $no + 1; ?></th>
 					<td><?php echo $bk->nama ?></td>
+					<td><?php echo date('d-m-Y', strtotime($bk->tgl_booking)) ?></td>
 					<td><?php echo $bk->no_rekening ?></td>
 					<td>Rp. <?php echo number_format($bk->harga_paket, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($bk->tarif, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($total, '0', ',', '.')  ?></td>
-					<td style="width: 40%;">
+					<td style="width: 30%;">
 						<div class="row">
 							<div class="col-md-6">
 								<?php
