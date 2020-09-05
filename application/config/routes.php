@@ -6,7 +6,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // Frontend
-$route['user/index']['GET'] = 'user/Dashboard/register';
+$route['user/index']['GET'] = 'user/Dashboard/index';
 $route['karya']['GET'] = 'user/Dashboard/karya';
 $route['register']['GET'] = 'user/Dashboard/register';
 $route['register_tambah']['POST'] = 'user/Dashboard/register_tambah';
