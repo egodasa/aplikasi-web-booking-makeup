@@ -1,8 +1,12 @@
-<!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center" style="height: 80%;">
 	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
 		<div class="row justify-content-center">
+			<div>
+				<a href="#pricing">Tarif</a> |
+				<a href="#about">Tentang Kami</a> |
+				<a href="#contact">Kontak Kami</a>
+			</div>
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
 				<h1>Selamat Datang</h1>
 				<h2>Ratih MakeUp Arts</h2>
@@ -91,7 +95,7 @@
 									<?php endforeach; ?>
 								</ul>
 								<div class="btn-wrap">
-									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Buy Now</a>
+									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
 								</div>
 							</div>
 						</div>

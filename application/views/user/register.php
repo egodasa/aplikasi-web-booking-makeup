@@ -1,4 +1,5 @@
 <section class="mt-5">
+
 	<div class="text-center">
 		<h1><i>Silahkan Isikan Data Anda !!!</i></h1>
 	</div>
