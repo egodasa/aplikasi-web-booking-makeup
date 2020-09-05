@@ -6,7 +6,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // Frontend
-$route['user/index']['GET'] = 'user/Dashboard/index';
+$route['user/index']['GET'] = 'user/Dashboard/register';
 $route['karya']['GET'] = 'user/Dashboard/karya';
 $route['register']['GET'] = 'user/Dashboard/register';
 $route['register_tambah']['POST'] = 'user/Dashboard/register_tambah';
@@ -65,7 +65,7 @@ $route['konfirmasi']['POST'] = 'admin/Booking/konfirmasi';
 
 // Laporan
 $route['admin/laporan']['GET'] = 'admin/Laporan/index';
-$route['admin/print_laporan']['POST'] = 'admin/Laporan/printLaporan';
+$route['admin/print_laporan']['GET'] = 'admin/Laporan/printLaporan';
 $route['admin/filter_laporan']['GET'] = 'admin/Laporan/filterLaporan';
 
 // User
