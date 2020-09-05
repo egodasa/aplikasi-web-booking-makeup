@@ -90,35 +90,38 @@
 
 <!-- Template Main JS File -->
 <script src="<?php echo base_url('assets/assetsfe') ?>/js/main.js"></script>
+
+
 <?php
 if ($this->session->flashdata('pesan') == TRUE) {
-	$pesan = $this->session->flashdata('pesan');
+    $pesan = $this->session->flashdata('pesan');
 ?>
-	<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
-	<script type="text/javascript">
-		Swal.fire(
-			'Berhasil!',
-			'<?= $pesan ?>',
-			'success'
-		)
-	</script>
+    
+    <script type="text/javascript">
+        Swal.fire(
+            'Berhasil!',
+            '<?= $pesan ?>',
+            'success'
+        )
+    </script>
 <?php }
-if ($this->session->flashdata('error') == TRUE) {
-	$error = $this->session->flashdata('error');
+if (!empty($this->session->flashdata('error'))) {
+    $error = $this->session->flashdata('error');
 ?>
-	<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
-	<script type="text/javascript">
-		Swal.fire({
-			icon: 'error',
-			title: 'Oops...',
-			text: '<?= $error ?>'
-		})
-	</script>
+    
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '<?= $error ?>'
+        })
+    </script>
 <?php
+    $this->session->set_flashdata('error', '');
 }
 ?>
+
+
 </body>
 
 </html>

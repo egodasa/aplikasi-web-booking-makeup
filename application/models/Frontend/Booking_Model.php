@@ -50,15 +50,15 @@ class Booking_Model extends CI_Model
 		$data = [];
 		$data['id_pengguna'] = $post["id_pengguna"];
 		$data['id_paket'] = $post["id_paket"];
-		$data['tgl_booking'] = $post["tgl_booking"];
+		$data['tgl_booking'] = date("Y-m-d H:i:s");
 		$data['tgl_makeup'] = $post["tgl_makeup"];
 		$data['nama_booking'] = $post["nama_booking"];
 		$data['alamat_booking'] = $post["alamat_booking"];
 		$data['id_kota'] = $post["id_kota"];
-		// $data['status'] = $post["status"];
 		$data['keterangan'] = $post["keterangan"];
-		// $data['total_bayar'] = $post["total_bayar"];
-		// $data['sudah_bayar'] = $post["sudah_bayar"];
+		$data['total_bayar'] = $post["total_bayar"];
+		$data['dp'] = $post["dp"];
+		$data['sudah_bayar'] = $post["sudah_bayar"];
 		return $this->db->insert($this->_table, $data);
 	}
 
@@ -194,5 +194,18 @@ class Booking_Model extends CI_Model
 			tb_makeup On tb_paket_makeup.id_makeup =tb_makeup.id_makeup
 			where tb_booking.status='Sudah Lunas'")->result();
 		}
+	}
+	
+	public function apakahBisaBookingPaket($id_paket, $tanggal)
+	{
+		$booking = $this->db->query("Select Count(tb_booking.id_booking) As banyak_booking,
+				tb_paket_makeup.batas_booking_per_hari 
+				 From 
+				tb_paket_makeup Inner Join 
+				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
+				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3 AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket) 
+				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas') AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket)")->row();
+		return $booking->banyak_booking+1 <= $booking->batas_booking_per_hari; 
 	}
 }
