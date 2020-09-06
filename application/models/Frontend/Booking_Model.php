@@ -223,12 +223,11 @@ class Booking_Model extends CI_Model
 		$list_tanggal = array();
 		foreach ($booking as $value)
 		{
-			if($value->banyak_booking < $value->batas_booking_per_hari)
+			if($value->banyak_booking >= $value->batas_booking_per_hari)
 			{
 				$list_tanggal[] = $value->tgl_makeup;
 			}
 		}
 		return $list_tanggal;
-		return $booking->banyak_booking+1 <= $booking->batas_booking_per_hari; 
 	}
 }
