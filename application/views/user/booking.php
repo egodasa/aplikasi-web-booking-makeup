@@ -21,7 +21,7 @@
                         <script>
                             var picker = new Pikaday({
                                 disableDayFn: function(date) {
-                                    var enabled_dates = ["2020-09-05"]; // dates I want to enabled.
+                                    var enabled_dates = <?=json_encode($tanggal_sudah_booking)?>; // dates I want to enabled.
                                     if ($.inArray(moment(date).format("YYYY-MM-DD"), enabled_dates) !== -1 || moment(date) < moment()) {
                                         return true;
                                     } else {
