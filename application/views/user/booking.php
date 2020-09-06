@@ -15,9 +15,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Tanggal Make Up</label>
-                            <input type="date" class="form-control" name="tgl_makeup" value="<?=$tanggal?>">
+                            <input type="text" class="form-control" name="tgl_makeup" value="" readonly>
                             <small><b>Pilih Tanggal Akad (Khusus Makeup Wedding Paket 2 dan Paket 3)</b></small>
                         </div>
+                        <script>
+                            var picker = new Pikaday({
+                                disableDayFn: function(date) {
+                                    var enabled_dates = ["2020-09-05"]; // dates I want to enabled.
+                                    if ($.inArray(moment(date).format("YYYY-MM-DD"), enabled_dates) !== -1 || moment(date) < moment()) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                },
+                                field: document.getElementsByName('tgl_makeup')[0],
+                                format: 'YYYY-MM-DD'
+                            });
+                        </script>
                         <div class="form-group">
                             <label for="">Nama Booking</label>
                             <input type="text" class="form-control" name="nama_booking">
