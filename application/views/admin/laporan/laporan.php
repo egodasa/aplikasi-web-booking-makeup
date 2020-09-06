@@ -12,21 +12,6 @@
 					<div class="form-group">
 						<label for="">Sampai Tanggal :</label>
 						<input type="date" class="form-control" value="<?= $sampai ?>" name="sampai" required>
-						<input type="text" id="datepicker" class="form-control">
-						<script>
-							var picker = new Pikaday({
-								disableDayFn: function(date) {
-									var enabled_dates = ["2020-09-05"]; // dates I want to enabled.
-									if ($.inArray(moment(date).format("YYYY-MM-DD"), enabled_dates) !== -1) {
-										return true;
-									} else {
-										return false;
-									}
-								},
-								field: document.getElementById('datepicker'),
-								format: 'YYYY-MM-DD'
-							});
-						</script>
 					</div>
 				</div>
 				<div class="col-md-5">

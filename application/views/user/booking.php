@@ -15,9 +15,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Tanggal Make Up</label>
-                            <input type="date" class="form-control" name="tgl_makeup" value="<?=$tanggal?>">
+                            <input type="text" class="form-control" name="tgl_makeup" value="" readonly>
                             <small><b>Pilih Tanggal Akad (Khusus Makeup Wedding Paket 2 dan Paket 3)</b></small>
                         </div>
+                        <script>
+                            var picker = new Pikaday({
+                                disableDayFn: function(date) {
+                                    var enabled_dates = <?=json_encode($tanggal_sudah_booking)?>; // dates I want to enabled.
+                                    if ($.inArray(moment(date).format("YYYY-MM-DD"), enabled_dates) !== -1 || moment(date) < moment()) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                },
+                                field: document.getElementsByName('tgl_makeup')[0],
+                                format: 'YYYY-MM-DD'
+                            });
+                        </script>
                         <div class="form-group">
                             <label for="">Nama Booking</label>
                             <input type="text" class="form-control" name="nama_booking">
@@ -94,7 +108,6 @@
                         <input type="hidden" name="total_bayar" />
                         <input type="hidden" name="sudah_bayar" value="0" />
                         <input type="hidden" name="dp" value="<?php echo $pk->biaya_dp; ?>" />
-                        <?php if($tombol): ?>
                             <p>
                                 <b>*Cara Pembayaran :</b> <br>
                                 <ol>
@@ -105,9 +118,6 @@
                             </p>
                             <button class="btn btn-primary" type="submit">Daftar Booking Sekarang</button>
 
-                        <?php else: ?>
-                            <h3 class="text-center">Silahkan pilih tanggal makeup untuk melanjutkan booking jadwal</h3>
-                        <?php endif; ?>
                     </div>
                 </div>
         </form>
@@ -138,10 +148,6 @@
 
     document.getElementsByName("id_kota")[0].addEventListener("change", function(){
         tampilTarif();
-    });
-
-    document.getElementsByName("tgl_makeup")[0].addEventListener("change", function(){
-        window.location.href = "?tanggal=" + this.value + "&id_paket=" + <?=$id?>;
     });
 
     tampilTarif();
