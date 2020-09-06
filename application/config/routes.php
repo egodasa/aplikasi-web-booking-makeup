@@ -65,7 +65,7 @@ $route['konfirmasi']['POST'] = 'admin/Booking/konfirmasi';
 
 // Laporan
 $route['admin/laporan']['GET'] = 'admin/Laporan/index';
-$route['admin/print_laporan']['POST'] = 'admin/Laporan/printLaporan';
+$route['admin/print_laporan']['GET'] = 'admin/Laporan/printLaporan';
 $route['admin/filter_laporan']['GET'] = 'admin/Laporan/filterLaporan';
 
 // User

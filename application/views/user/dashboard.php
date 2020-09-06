@@ -1,5 +1,3 @@
-<!-- ======= Hero Section ======= -->
-
 <section id="hero" class="d-flex align-items-center" style="height: 80%;">
 	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 

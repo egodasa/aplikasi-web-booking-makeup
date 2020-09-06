@@ -91,6 +91,7 @@
 <!-- Template Main JS File -->
 <script src="<?php echo base_url('assets/assetsfe') ?>/js/main.js"></script>
 
+
 <?php
 if ($this->session->flashdata('pesan') == TRUE) {
     $pesan = $this->session->flashdata('pesan');
@@ -119,6 +120,7 @@ if (!empty($this->session->flashdata('error'))) {
     $this->session->set_flashdata('error', '');
 }
 ?>
+
 
 </body>
 
