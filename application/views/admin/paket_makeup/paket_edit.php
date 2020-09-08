@@ -30,14 +30,23 @@
                 <input type="text" name="batas_booking_per_hari" class="form-control" value="<?php echo $pm->batas_booking_per_hari ?>">
             </div>
             <div class="form-group">
+                <label for="">Jumlah Pekerja</label>
+                <input type="text" name="jumlah_pekerja" class="form-control" value="<?php echo $pm->jumlah_pekerja ?>">
+            </div>
+            <div class="form-group">
                 <label for="">Biaya / DP</label>
                 <input type="text" name="biaya_dp" class="form-control" value="<?php echo $pm->biaya_dp ?>">
             </div>
             <div class="form-group">
-                <label for="">Foto</label>
+                <label for="">
+                    Foto <br>
+                    <small>*Upload foto baru untuk mengganti foto</small>
+                </label>
+                <br>
+                <img src="<?php echo base_url() . './assets/upload/' . $pm->foto ?>" width="100" />
                 <input type="file" name="foto" class="form-control">
                 <input type="hidden" name="foto_lama" value="<?php echo $pm->foto ?>">
-                <?php echo $pm->foto ?>
+
             </div>
             <button class="btn btn-primary" type="submit">Simpan Data</button>
         </form>

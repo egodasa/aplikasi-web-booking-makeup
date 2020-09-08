@@ -11,6 +11,7 @@
                    <th scope="col">Harga Paket</th>
                    <th scope="col">Deskripsi</th>
                    <th scope="col">Batas Booking /Hari</th>
+                   <th scope="col">Jumlah Pekerja</th>
                    <th scope="col">Biaya / DP</th>
                    <th scope="col">Foto</th>
                    <th scope="col">Aksi</th>
@@ -20,10 +21,11 @@
                <?php foreach ($paket_makeup as $no => $pm) : ?>
                    <tr>
                        <th scope="row"><?php echo $no + 1; ?></th>
-                       <td><?php echo $pm->nm_paket ?></td>
+                       <td><?php echo $pm->nm_makeup."<br>".$pm->nm_paket ?></td>
                        <td>Rp. <?php echo number_format($pm->harga_paket, '0', ',', '.') ?></td>
                        <td><?php echo $pm->deskripsi ?></td>
                        <td><?php echo $pm->batas_booking_per_hari ?> Pesanan</td>
+                       <td><?php echo $pm->jumlah_pekerja ?> Orang</td>
                        <td>Rp. <?php echo number_format($pm->biaya_dp, '0', ',', '.') ?></td>
                        <td><img src="<?php echo base_url() . './assets/upload/' . $pm->foto ?>" alt="" class="img-fluid" style="width: 150px;"></td>
                        <td style="width: 10%;"><a href="<?php echo base_url('admin/paket_edit/') . $pm->id_paket ?>" class="btn btn-sm btn-warning">Edit</a> | <a href="<?php echo base_url('admin/paket_hapus/') . $pm->id_paket ?>" class="btn btn-sm btn-danger">Hapus</a></td>
