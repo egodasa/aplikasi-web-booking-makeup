@@ -209,21 +209,21 @@ class Booking_Model extends CI_Model
 		return $booking->banyak_booking+1 <= $booking->batas_booking_per_hari; 
 	}
 
-	public function tanggalSudahBooking($id_paket)
+	public function tanggalSudahBooking($id_paket, $maksimal_pekerja)
 	{
 		$booking = $this->db->query("Select DATE(tb_booking.tgl_makeup) AS tgl_makeup, Count(tb_booking.id_booking) As banyak_booking,
-				tb_paket_makeup.batas_booking_per_hari 
+				tb_paket_makeup.batas_booking_per_hari, SUM(tb_paket_makeup.jumlah_orang) AS jumlah_orang  
 				 From 
 				tb_paket_makeup Inner Join 
 				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
 				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
-				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3 AND tb_paket_makeup.id_paket = $id_paket) 
-				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas') AND tb_paket_makeup.id_paket = $id_paket) GROUP BY tb_booking.tgl_makeup")->result();
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3) 
+				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')) GROUP BY tb_booking.tgl_makeup")->result();
 
 		$list_tanggal = array();
 		foreach ($booking as $value)
 		{
-			if($value->banyak_booking >= $value->batas_booking_per_hari)
+			if($value->jumlah_orang + $maksimal_pekerja >= 5)
 			{
 				$list_tanggal[] = $value->tgl_makeup;
 			}

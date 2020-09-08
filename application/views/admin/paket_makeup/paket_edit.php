@@ -30,10 +30,6 @@
                 <input type="text" name="batas_booking_per_hari" class="form-control" value="<?php echo $pm->batas_booking_per_hari ?>">
             </div>
             <div class="form-group">
-                <label for="">Jumlah Pekerja</label>
-                <input type="text" name="jumlah_pekerja" class="form-control" value="<?php echo $pm->jumlah_pekerja ?>">
-            </div>
-            <div class="form-group">
                 <label for="">Biaya / DP</label>
                 <input type="text" name="biaya_dp" class="form-control" value="<?php echo $pm->biaya_dp ?>">
             </div>

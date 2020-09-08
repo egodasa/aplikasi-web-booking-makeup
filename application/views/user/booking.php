@@ -15,7 +15,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Tanggal Make Up</label>
-                            <input type="text" class="form-control" name="tgl_makeup" value="" readonly>
+                            <input type="text" class="form-control" name="tgl_makeup" value="" required readonly>
                             <small><b>Pilih Tanggal Akad (Khusus Makeup Wedding Paket 2 dan Paket 3)</b></small>
                         </div>
                         <script>
