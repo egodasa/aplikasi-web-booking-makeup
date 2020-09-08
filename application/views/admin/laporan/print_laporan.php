@@ -27,10 +27,12 @@
 			</thead>
 			<tbody>
 				<?php
-				$jumlahPendapatan = "";
-				foreach ($laporan as $no => $lp) {
-					$totalBayar = $lp->tarif + $lp->harga_paket;
-					@$jumlahPendapatan += $totalBayar;  ?>
+					$jumlahPendapatan = 0;
+					foreach ($laporan as $no => $lp)
+					{
+						$totalBayar = $lp->tarif + $lp->harga_paket;
+						$jumlahPendapatan += $totalBayar;
+				?>
 					<tr>
 						<th scope="row"><?php echo $no + 1; ?></th>
 						<td><?php echo $lp->nama_booking ?></td>

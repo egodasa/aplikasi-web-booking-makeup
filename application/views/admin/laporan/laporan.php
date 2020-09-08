@@ -29,7 +29,10 @@
 					</div>
 				</div>
 				<div class="col-md-1">
-					<button id="show" class="btn btn-sm btn-primary" type="submit"><i class="fas fa-search"></i></button>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;</label>
+						<button id="show" class="btn btn-sm btn-primary form-control" type="submit"><i class="fas fa-search"></i></button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -61,8 +64,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($laporan as $no => $lp) : ?>
-					<?php $totalBayar = $lp->tarif + $lp->harga_paket ?>
+				<?php
+					$jumlahPendapatan = 0;
+					foreach ($laporan as $no => $lp)
+					{
+						$totalBayar = $lp->tarif + $lp->harga_paket;
+						$jumlahPendapatan += $totalBayar;
+				?>
 					<tr>
 						<th scope="row"><?php echo $no + 1; ?></th>
 						<td><?php echo $lp->nama_booking ?></td>
@@ -71,8 +79,23 @@
 						<td>Rp. <?php echo number_format($totalBayar, '0', ',', '.') ?></td>
 						<td><?php echo $lp->alamat_booking ?></td>
 					</tr>
-				<?php endforeach; ?>
+				<?php
+					}
+				?>
 			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="4" scope="col">Pendapatan</th>
+					<th>Rp. <?php
+							if ($jumlahPendapatan == 0) {
+							?>
+							,00-
+						<?php } else { ?>
+							<?php echo number_format($jumlahPendapatan, '0', ',', '.')  ?>
+						<?php } ?>
+					</th>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>
