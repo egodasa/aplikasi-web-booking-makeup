@@ -79,21 +79,19 @@
 
 						<div class="col-lg-4 col-md-6 mt-4 mt-md-0 mb-5" data-aos="zoom-in" data-aos-delay="100">
 							<div class="box featured" style="height: 30rem;">
-								<h1><?= $paket->nm_paket ?></h1>
+								<h1 style="color: white;"><?= $paket->nm_paket ?></h1>
 								<h4><sup>Rp.</sup><?= number_format($paket->harga_paket, '0', ',', '.') ?></h4>
 								<?php if ($paket->biaya_dp > 0) { ?>
-									<h5>DP : <sup>Rp.</sup><?= number_format($paket->biaya_dp, '0', ',', '.') ?></h5>
-								<?php } else { ?>
-									<small></small>
-								<?php } ?>
-								<ul>
+									<h5 style="color: white;">DP : <sup>Rp.</sup><?= number_format($paket->biaya_dp, '0', ',', '.') ?></h5>
+								<?php }  ?>
+								<p style="color: white;">
 									<?php
 									$list_fitur = explode("<br>", $paket->deskripsi);
 									foreach ($list_fitur as $fitur) :
 									?>
-										<li><?= $fitur ?></li>
+										<div style="color: white;"><?= $fitur ?></div>
 									<?php endforeach; ?>
-								</ul>
+								</p>
 								<div class="btn-wrap">
 									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
 								</div>

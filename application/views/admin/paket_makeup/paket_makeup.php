@@ -20,7 +20,7 @@
                <?php foreach ($paket_makeup as $no => $pm) : ?>
                    <tr>
                        <th scope="row"><?php echo $no + 1; ?></th>
-                       <td><?php echo $pm->nm_paket ?></td>
+                       <td><?php echo $pm->nm_makeup."<br>".$pm->nm_paket ?></td>
                        <td>Rp. <?php echo number_format($pm->harga_paket, '0', ',', '.') ?></td>
                        <td><?php echo $pm->deskripsi ?></td>
                        <td><?php echo $pm->batas_booking_per_hari ?> Pesanan</td>

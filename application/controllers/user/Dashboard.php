@@ -58,6 +58,7 @@ class Dashboard extends MY_Controller
         $data['id'] = $id;
         $data['paket'] = $this->paketMakeupModel->getById($id);
         $data['tarif'] = $this->paketMakeupModel->getKota();
+        $data['tanggal_sudah_booking'] = $this->bookingModel->tanggalSudahBooking($id, $data['paket'][0]->jumlah_orang);
         $this->view_frontend('user/booking', $data);
     }
 

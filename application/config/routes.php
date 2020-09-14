@@ -28,7 +28,7 @@ $route['admin/admin_edit/(:num)']['GET'] = 'admin/Admin/admin_edit/$1';
 $route['admin/admin_edit_aksi']['POST'] = 'admin/Admin/admin_edit_aksi';
 $route['admin/admin_hapus/(:num)']['GET'] = 'admin/Admin/admin_hapus_aksi/$1';
 
-$route['admin']['GET'] = 'admin/Dashboard/index';
+$route['admin/dashboard']['GET'] = 'admin/Dashboard/index';
 $route['admin/login']['GET'] = 'admin/Login/login_admin';
 $route['admin/login_aksi']['POST'] = 'admin/Login/login_aksi';
 // $route['admin/logout_aksi']['GET'] = 'admin/Login/logout_aksi';

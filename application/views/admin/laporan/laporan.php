@@ -12,21 +12,6 @@
 					<div class="form-group">
 						<label for="">Sampai Tanggal :</label>
 						<input type="date" class="form-control" value="<?= $sampai ?>" name="sampai" required>
-						<input type="text" id="datepicker" class="form-control">
-						<script>
-							var picker = new Pikaday({
-								disableDayFn: function(date) {
-									var enabled_dates = ["2020-09-05"]; // dates I want to enabled.
-									if ($.inArray(moment(date).format("YYYY-MM-DD"), enabled_dates) !== -1) {
-										return true;
-									} else {
-										return false;
-									}
-								},
-								field: document.getElementById('datepicker'),
-								format: 'YYYY-MM-DD'
-							});
-						</script>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -44,7 +29,10 @@
 					</div>
 				</div>
 				<div class="col-md-1">
-					<button id="show" class="btn btn-sm btn-primary" type="submit"><i class="fas fa-search"></i></button>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;</label>
+						<button id="show" class="btn btn-sm btn-primary form-control" type="submit"><i class="fas fa-search"></i></button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,23 +59,44 @@
 					<th scope="col">Nama Customers</th>
 					<th scope="col">Paket Makeup</th>
 					<th scope="col">Tanggal Booking</th>
+					<th scope="col">Tanggal Makeup</th>
 					<th scope="col">Total Bayar</th>
 					<th scope="col">Alamat</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($laporan as $no => $lp) : ?>
-					<?php $totalBayar = $lp->tarif + $lp->harga_paket ?>
+				<?php
+				$jumlahPendapatan = 0;
+				foreach ($laporan as $no => $lp) {
+					$totalBayar = $lp->tarif + $lp->harga_paket;
+					$jumlahPendapatan += $totalBayar;
+				?>
 					<tr>
 						<th scope="row"><?php echo $no + 1; ?></th>
 						<td><?php echo $lp->nama_booking ?></td>
 						<td><?php echo $lp->nm_makeup ?> - <?php echo $lp->nm_paket ?></td>
 						<td><?php echo date('d-m-Y', strtotime($lp->tgl_booking)) ?></td>
+						<td><?php echo date('d-m-Y', strtotime($lp->tgl_makeup)) ?></td>
 						<td>Rp. <?php echo number_format($totalBayar, '0', ',', '.') ?></td>
 						<td><?php echo $lp->alamat_booking ?></td>
 					</tr>
-				<?php endforeach; ?>
+				<?php
+				}
+				?>
 			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="5" scope="col">Pendapatan</th>
+					<th>Rp. <?php
+							if ($jumlahPendapatan == 0) {
+							?>
+							,00-
+						<?php } else { ?>
+							<?php echo number_format($jumlahPendapatan, '0', ',', '.')  ?>
+						<?php } ?>
+					</th>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>

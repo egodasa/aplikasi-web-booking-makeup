@@ -8,6 +8,8 @@
 			<tr>
 				<th>Nama Booking</th>
 				<th>Nama Paket</th>
+				<th>Tanggal Booking</th>
+				<th>Tanggal Makeup</th>
 				<th>Harga</th>
 				<th>Tarif</th>
 				<th>Total Pembayaran</th>
@@ -19,28 +21,39 @@
 				<tr>
 					<td><?php echo $bk->nama_booking ?></td>
 					<td><?php echo $bk->nm_paket ?></td>
+					<td><?php echo date('d-m-Y', strtotime($bk->tgl_booking)) ?></td>
+					<td><?php echo date('d-m-Y', strtotime($bk->tgl_makeup)) ?></td>
 					<td>Rp. <?php echo number_format($bk->harga_paket, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($bk->tarif, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($a, '0', ',', '.') ?></td>
 					<td><?php echo $bk->alamat_booking ?></td>
 					<td>
 						<?php
-						if ($bk->status == "Belum Bayar DP") {
+						if ($bk->hangus == "1") {
 						?>
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lihat<?php echo $bk->id_booking ?>">Silahkan Lakukan Pembayaran</button>
-						<?php } elseif ($bk->status == "Menunggu Konfirmasi") { ?>
-							<div class="alert alert-warning text-center" role="alert">
-								Menunggu Konfirmasi
-							</div>
-						<?php } elseif ($bk->status == "Sudah Lunas") { ?>
-							<div class="alert alert-info text-center" role="alert">
-								Booking Diterima
-							</div>
-						<?php } elseif ($bk->status == "Dibatalkan") { ?>
 							<div class="alert alert-danger text-center" role="alert">
-								Booking Ditolak | Hubungi Kami
+								Transaksi Anda Dibatalkan, karena terlambat waktu pembayaran
 							</div>
-						<?php } ?>
+							<?php
+						} else {
+
+							if ($bk->status == "Belum Bayar DP") {
+							?>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lihat<?php echo $bk->id_booking ?>">Silahkan Lakukan Pembayaran</button>
+							<?php } elseif ($bk->status == "Menunggu Konfirmasi") { ?>
+								<div class="alert alert-warning text-center" role="alert">
+									Menunggu Konfirmasi
+								</div>
+							<?php } elseif ($bk->status == "Sudah Lunas") { ?>
+								<div class="alert alert-info text-center" role="alert">
+									Booking Diterima
+								</div>
+							<?php } elseif ($bk->status == "Dibatalkan") { ?>
+								<div class="alert alert-danger text-center" role="alert">
+									Booking Ditolak | Hubungi Kami
+								</div>
+						<?php }
+						} ?>
 					</td>
 				</tr>
 				<div class="modal fade" id="lihat<?php echo $bk->id_booking ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

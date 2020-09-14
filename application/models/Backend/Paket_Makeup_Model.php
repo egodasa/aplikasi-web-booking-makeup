@@ -11,6 +11,7 @@ class Paket_Makeup_Model extends CI_Model
 	public $harga_paket; // kolom tabel
 	public $deskripsi; // kolom tabel
 	public $batas_booking_per_hari; // kolom tabel
+	public $jumlah_orang; // kolom tabel
 
 	public function getAll()
 	{
@@ -18,11 +19,14 @@ class Paket_Makeup_Model extends CI_Model
         tb_paket_makeup.id_paket,
         tb_paket_makeup.id_makeup,
         tb_paket_makeup.nm_paket,
+        tb_makeup.nm_makeup,
+        tb_makeup.lokasi_makeup,
         tb_paket_makeup.harga_paket,
         tb_paket_makeup.deskripsi,
         tb_paket_makeup.biaya_dp,
         tb_paket_makeup.foto,
         tb_paket_makeup.batas_booking_per_hari,
+        tb_paket_makeup.jumlah_orang,
         tb_makeup.nm_makeup
     From
         tb_paket_makeup Left Join
@@ -46,11 +50,14 @@ class Paket_Makeup_Model extends CI_Model
         tb_paket_makeup.id_paket,
         tb_paket_makeup.id_makeup,
         tb_paket_makeup.nm_paket,
+        tb_makeup.nm_makeup,
+        tb_makeup.lokasi_makeup,
         tb_paket_makeup.harga_paket,
         tb_paket_makeup.deskripsi,
         tb_paket_makeup.biaya_dp,
         tb_paket_makeup.foto,
         tb_paket_makeup.batas_booking_per_hari,
+        tb_paket_makeup.jumlah_orang,
         tb_makeup.nm_makeup
     From
         tb_paket_makeup Join
@@ -70,6 +77,7 @@ class Paket_Makeup_Model extends CI_Model
 		$data['id_makeup'] = $post["id_makeup"];
 		$data['deskripsi'] = str_replace(PHP_EOL, "<br>", $post["deskripsi"]);
 		$data['batas_booking_per_hari'] = $post["batas_booking_per_hari"];
+		$data['jumlah_orang'] = 1;
 		$data['biaya_dp'] = $post["biaya_dp"];
 		$data['foto'] = $file['foto']['name'];
 
@@ -95,6 +103,7 @@ class Paket_Makeup_Model extends CI_Model
 		$data['id_makeup'] = $post["id_makeup"];
 		$data['deskripsi'] = str_replace(PHP_EOL, "<br>", $post["deskripsi"]);
 		$data['batas_booking_per_hari'] = $post["batas_booking_per_hari"];
+		// $data['jumlah_orang'] = 1;
 		$data['biaya_dp'] = $post["biaya_dp"];
 		$data['foto'] = $file["foto"]["name"];
 

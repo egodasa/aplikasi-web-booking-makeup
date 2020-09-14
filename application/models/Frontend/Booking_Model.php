@@ -25,12 +25,15 @@ class Booking_Model extends CI_Model
         tb_booking.id_booking,
         tb_booking.nama_booking,
         tb_booking.alamat_booking,
+        tb_booking.tgl_booking,
+        tb_booking.tgl_makeup,
         tb_booking.status,
         tb_paket_makeup.nm_paket,
         tb_paket_makeup.harga_paket,
         tb_paket_makeup.harga_paket,
         tb_pengguna.id_pengguna,
-        tb_kota.tarif
+		tb_kota.tarif,
+		(tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) > 3) AS hangus
     From
         tb_booking Join
         tb_paket_makeup On tb_booking.id_paket =
@@ -85,6 +88,7 @@ class Booking_Model extends CI_Model
         tb_booking.nama_booking,
         tb_booking.alamat_booking,
         tb_booking.tgl_booking,
+        tb_booking.tgl_makeup,
         tb_booking.status,
         tb_paket_makeup.nm_paket,
         tb_paket_makeup.harga_paket,
@@ -111,6 +115,7 @@ class Booking_Model extends CI_Model
         tb_booking.nama_booking,
         tb_booking.alamat_booking,
         tb_booking.tgl_booking,
+        tb_booking.tgl_makeup,
         tb_booking.status,
         tb_paket_makeup.nm_paket,
         tb_paket_makeup.harga_paket,
@@ -156,6 +161,7 @@ class Booking_Model extends CI_Model
 			tb_booking.nama_booking,
 			tb_booking.alamat_booking,
 			tb_booking.tgl_booking,
+			tb_booking.tgl_makeup,
 			tb_booking.status,
 			tb_paket_makeup.nm_paket,
 			tb_paket_makeup.id_paket,
@@ -179,6 +185,7 @@ class Booking_Model extends CI_Model
 			tb_booking.nama_booking,
 			tb_booking.alamat_booking,
 			tb_booking.tgl_booking,
+			tb_booking.tgl_makeup,
 			tb_booking.status,
 			tb_paket_makeup.nm_paket,
 			tb_paket_makeup.id_paket,
@@ -195,7 +202,7 @@ class Booking_Model extends CI_Model
 			where tb_booking.status='Sudah Lunas'")->result();
 		}
 	}
-	
+
 	public function apakahBisaBookingPaket($id_paket, $tanggal)
 	{
 		$booking = $this->db->query("Select Count(tb_booking.id_booking) As banyak_booking,
@@ -206,6 +213,26 @@ class Booking_Model extends CI_Model
 				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
 				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3 AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket) 
 				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas') AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket)")->row();
-		return $booking->banyak_booking+1 <= $booking->batas_booking_per_hari; 
+		return $booking->banyak_booking + 1 <= $booking->batas_booking_per_hari;
+	}
+
+	public function tanggalSudahBooking($id_paket, $maksimal_pekerja)
+	{
+		$booking = $this->db->query("Select DATE(tb_booking.tgl_makeup) AS tgl_makeup, Count(tb_booking.id_booking) As banyak_booking,
+				tb_paket_makeup.batas_booking_per_hari, SUM(tb_paket_makeup.jumlah_orang) AS jumlah_orang  
+				 From 
+				tb_paket_makeup Inner Join 
+				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
+				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3) 
+				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')) GROUP BY tb_booking.tgl_makeup")->result();
+
+		$list_tanggal = array();
+		foreach ($booking as $value) {
+			if ($value->jumlah_orang + $maksimal_pekerja >= 5) {
+				$list_tanggal[] = $value->tgl_makeup;
+			}
+		}
+		return $list_tanggal;
 	}
 }
