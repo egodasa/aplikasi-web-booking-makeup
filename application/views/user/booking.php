@@ -125,11 +125,12 @@
 						<ol>
 							<li><b>Silahkan transfer uang sejumlah besar DP jika paket yang Anda ambil MEMILIKI DP. Pelunasan sisa pembayaran dapat Anda lakukan setelah proses makeup selesai</b></li>
 							<li><b>Silahkan transfer uang sejumlah TOTAL HARGA jika paket yang Anda ambil TIDAK memiliki DP.</b></li>
-							<li><b>Setelah Anda transfer, silahkan konfirmasi pembayaran dengan mengupload bukti pembayaran melalui menu <a href="riwayat">Riwayat</a></b></li>
+							<li><b>Setelah Anda transfer, silahkan konfirmasi pembayaran dengan mengupload bukti pembayaran melalui menu
+									<a href="<?php echo base_url('riwayat') ?>">Riwayat</a></b>
+							</li>
 						</ol>
 					</p>
 					<button class="btn btn-primary" type="submit">Daftar Booking Sekarang</button>
-
 				</div>
 			</div>
 		</form>
@@ -137,6 +138,7 @@
 	</div>
 </section><!-- End Portfolio Section -->
 <script>
+	// json_encode => ubah dari php ke js
 	var kota = <?php echo json_encode($tarif); ?>;
 	var harga_paket = <?php echo $pk->harga_paket; ?>;
 	var biaya_dp = <?php echo $pk->biaya_dp; ?>;
@@ -144,6 +146,7 @@
 
 	function tampilTarif() {
 		var kota_terpilih = kota[document.getElementsByName("id_kota")[0].selectedIndex];
+		// console.log(kota_terpilih);
 		tarif = kota_terpilih.tarif;
 
 		<?php
@@ -160,11 +163,12 @@
 	}
 
 	function tampilTotalHarga() {
-		var total = parseInt(harga_paket) + parseInt(biaya_dp) + parseInt(tarif);
+		var total = parseInt(harga_paket) - parseInt(biaya_dp) + parseInt(tarif);
 		document.getElementsByName("total_bayar")[0].value = total;
 		document.getElementById("total_harga").innerHTML = "Rp" + numeral(total).format('Rp10,000');
 	}
 
+	// waktu memilih kota di select box option
 	document.getElementsByName("id_kota")[0].addEventListener("change", function() {
 		tampilTarif();
 	});

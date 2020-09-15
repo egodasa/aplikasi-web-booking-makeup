@@ -39,7 +39,7 @@
 				<div class="col-md-3">
 					<div class="info">
 						<div class="email">
-							<a href="mailto:aditya.agusta098@gmail.com"><i class="icofont-envelope"></i></a>
+							<a href="mailto:rwahyuniislami@gmail.com"><i class="icofont-envelope"></i></a>
 							<h4>Email:</h4>
 							<p>rwahyuniislami@gmail.com</p>
 						</div>

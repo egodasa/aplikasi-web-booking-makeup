@@ -79,9 +79,8 @@
 									<div class="form-group">
 										<label for="">Bank</label>
 										<select name="bank" id="" class="form-control">
-											<option value="BNI">BNI</option>
-											<option value="BRI">BRI</option>
-											<option value="BCA">BCA</option>
+											<option value="BNI">BNI - 0900335784</option>
+											<option value="BRI">BRI - 7241 01 010515 53 9</option>
 										</select>
 									</div>
 									<div class="form-group">

@@ -17,6 +17,9 @@
 					<option value="Langsung">Langsung</option>
 					<option value="Studio">Studio</option>
 				</select>
+				<script>
+					document.getElementsByName('lokasi_makeup')[0].value = "<?php echo $mu->lokasi_makeup ?>";
+				</script>
 			</div>
 			<button class="btn btn-primary" type="submit">Simpan Data</button>
 		<?php endforeach; ?>

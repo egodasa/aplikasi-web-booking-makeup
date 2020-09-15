@@ -39,56 +39,51 @@ class Dashboard extends MY_Controller
 		$this->view_frontend('user/register');
 	}
 
-    public function booking($id)
-    {
-        $data['tombol'] = false;
-        $data['tanggal'] = null;
-        if(!empty($_GET['tanggal']))
-        {
-            $data['tanggal'] = $_GET['tanggal'];
-            if($this->bookingModel->apakahBisaBookingPaket($_GET['id_paket'], $_GET['tanggal']))
-            {
-                $data['tombol'] = true;
-            }
-            else
-            {
-                $this->session->set_flashdata('error', 'Tanggal makeup yang Anda pilih sudah penuh! Silahkan pilih tanggal lain');
-            }
-        }
-        $data['id'] = $id;
-        $data['paket'] = $this->paketMakeupModel->getById($id);
-        $data['tarif'] = $this->paketMakeupModel->getKota();
-        $data['tanggal_sudah_booking'] = $this->bookingModel->tanggalSudahBooking($id, $data['paket'][0]->jumlah_orang);
-        $this->view_frontend('user/booking', $data);
-    }
+	public function booking($id)
+	{
+		$data['tombol'] = false;
+		$data['tanggal'] = null;
+		if (!empty($_GET['tanggal'])) {
+			$data['tanggal'] = $_GET['tanggal'];
+			if ($this->bookingModel->apakahBisaBookingPaket($_GET['id_paket'], $_GET['tanggal'])) {
+				$data['tombol'] = true;
+			} else {
+				$this->session->set_flashdata('error', 'Tanggal makeup yang Anda pilih sudah penuh! Silahkan pilih tanggal lain');
+			}
+		}
+		$data['id'] = $id;
+		$data['paket'] = $this->paketMakeupModel->getById($id);
+		$data['tarif'] = $this->paketMakeupModel->getKota();
+		$data['tanggal_sudah_booking'] = $this->bookingModel->tanggalSudahBooking($id, $data['paket'][0]->jumlah_orang);
+		$this->view_frontend('user/booking', $data);
+	}
 
-    public function booking_tambah()
-    {
-        if (!$this->session->userdata('username'))
-        {
-            $this->session->set_flashdata('error', 'Anda Harus Login Terlebih Dahulu.');
-            redirect('register');
-        }
-        else
-        {
-            if($this->bookingModel->apakahBisaBookingPaket($_POST['id_paket'], $_POST['tgl_makeup']))
-            {
-                $this->bookingModel->save($_POST);
-                $this->session->set_flashdata('pesan', 'Booking Berhasil dilakukan.');
-                redirect('user/index');
-            }
-            else
-            {
-                $this->session->set_flashdata('pesan', 'Tanggal Booking sudah penuh. Silahkan pilih tanggal lain!');
-                $this->booking($_POST['id_paket']);
-            }
-        }
-    }
+	public function booking_tambah()
+	{
+		if (!$this->session->userdata('username')) {
+			$this->session->set_flashdata('error', 'Anda Harus Login Terlebih Dahulu.');
+			redirect('register');
+		} else {
+			if ($this->bookingModel->apakahBisaBookingPaket($_POST['id_paket'], $_POST['tgl_makeup'])) {
+				$this->bookingModel->save($_POST);
+				$this->session->set_flashdata('pesan', 'Booking Berhasil dilakukan.');
+				redirect('user/index');
+			} else {
+				$this->session->set_flashdata('pesan', 'Tanggal Booking sudah penuh. Silahkan pilih tanggal lain!');
+				$this->booking($_POST['id_paket']);
+			}
+		}
+	}
 
 	public function riwayat()
 	{
-		$data['booking'] = $this->bookingModel->getAll();
-		$this->view_frontend('user/riwayat', $data);
+		if (!$this->session->userdata('username')) {
+			$this->session->set_flashdata('error', 'Anda Harus Login Terlebih Dahulu.');
+			redirect('register');
+		} else {
+			$data['booking'] = $this->bookingModel->getAll();
+			$this->view_frontend('user/riwayat', $data);
+		}
 	}
 
 	public function pembayaran()

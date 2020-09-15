@@ -2,11 +2,11 @@
 	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
 		<div class="row justify-content-center">
-			<div>
+			<!-- <div>
 				<a href="#pricing">Tarif</a> |
 				<a href="#about">Tentang Kami</a> |
 				<a href="#contact">Kontak Kami</a>
-			</div>
+			</div> -->
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
 				<h1>Selamat Datang</h1>
 				<h2>Ratih MakeUp Arts</h2>
