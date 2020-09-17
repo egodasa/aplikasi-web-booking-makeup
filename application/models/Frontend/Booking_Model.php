@@ -222,7 +222,7 @@ class Booking_Model extends CI_Model
 				tb_paket_makeup Inner Join 
 				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
 				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
-				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3 AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket) 
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 12 AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket) 
 				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas') AND DATE(tb_booking.tgl_makeup) = '$tanggal' AND tb_paket_makeup.id_paket = $id_paket)")->row();
 		return $booking->banyak_booking + 1 <= $booking->batas_booking_per_hari;
 	}
@@ -235,7 +235,7 @@ class Booking_Model extends CI_Model
 				tb_paket_makeup Inner Join 
 				tb_makeup On tb_makeup.id_makeup = tb_paket_makeup.id_makeup Inner Join
 				 tb_booking On tb_booking.id_paket = tb_paket_makeup.id_paket 
-				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 3) 
+				WHERE (tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) < 12) 
 				OR (tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')) GROUP BY tb_booking.tgl_makeup")->result();
 
 		$list_tanggal = array();

@@ -92,6 +92,22 @@
                                     <?php endforeach; ?>
                                 </p>
                                 <div class="btn-wrap">
+                                    <p style="color: white;">
+                                        <?php
+                                            if($paket->jumlah_booking == 0)
+                                            {
+                                        ?>
+                                                Belum Pernah Dibooking
+                                        <?php
+                                            }
+                                            else
+                                            {
+                                        ?>
+                                            Sudah Dibooking Sebanyak <?=$paket->jumlah_booking?> Kali
+                                        <?php
+                                            }
+                                        ?>
+                                    </p>
                                     <a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
                                 </div>
                             </div>
