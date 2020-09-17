@@ -30,10 +30,9 @@ class Booking_Model extends CI_Model
         tb_booking.status,
         tb_paket_makeup.nm_paket,
         tb_paket_makeup.harga_paket,
-        tb_paket_makeup.harga_paket,
         tb_pengguna.id_pengguna,
 		tb_kota.tarif,
-		(tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) > 3) AS hangus
+		(tb_booking.status = 'Belum Bayar DP' AND timestampdiff(HOUR, tb_booking.tgl_booking, NOW()) > 12) AS hangus
     From
         tb_booking Join
         tb_paket_makeup On tb_booking.id_paket =
@@ -41,6 +40,18 @@ class Booking_Model extends CI_Model
         tb_kota On tb_booking.id_kota = tb_kota.id_kota Join
         tb_pengguna On tb_booking.id_pengguna =
         tb_pengguna.id_pengguna Where tb_booking.id_pengguna='$id'")->result();
+	}
+
+	public function tampilPemesanan()
+	{
+		return $this->db->query("Select
+        tb_paket_makeup.id_paket,
+		tb_paket_makeup.nm_paket,
+		tb_booking.status
+    From
+        tb_booking Join
+        tb_paket_makeup On tb_booking.id_paket =
+	    tb_paket_makeup.id_paket Join WHERE tb_booking.status = 'Sudah Lunas'");
 	}
 
 	public function getById($id)

@@ -25,6 +25,7 @@ class Dashboard extends MY_Controller
 	public function karya()
 	{
 		$data['makeup'] = $this->makeupModel->getAll();
+		$data['booking'] = $this->bookingModel->tampilPemesanan();
 		$data_makeup = $this->makeupModel->getAll();
 		foreach ($data_makeup as $no => $makeup) {
 			$data['makeup'][$no]->paket = new stdClass();
