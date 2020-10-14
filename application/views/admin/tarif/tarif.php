@@ -38,7 +38,7 @@
 				<div class="modal-body">
 					<form action="<?php echo base_url('admin/tarif_tambah') ?>" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="">Nama Paket</label>
+							<label for="">Nama Kota</label>
 							<input type="text" name="nm_kota" class="form-control">
 						</div>
 						<div class="form-group">

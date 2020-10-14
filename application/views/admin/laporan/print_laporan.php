@@ -27,11 +27,10 @@
 			</thead>
 			<tbody>
 				<?php
-					$jumlahPendapatan = 0;
-					foreach ($laporan as $no => $lp)
-					{
-						$totalBayar = $lp->tarif + $lp->harga_paket;
-						$jumlahPendapatan += $totalBayar;
+				$jumlahPendapatan = 0;
+				foreach ($laporan as $no => $lp) {
+					$totalBayar = $lp->tarif + $lp->harga_paket;
+					$jumlahPendapatan += $totalBayar;
 				?>
 					<tr>
 						<th scope="row"><?php echo $no + 1; ?></th>

@@ -16,8 +16,8 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item">
-			<a class="nav-link" href="<?php echo base_url('admin') ?>">
+		<li class="nav-item <?= $this->uri->segment(2) == 'dashboard' ? 'active' : '' ?>">
+			<a class="nav-link" href="<?php echo base_url('admin/dashboard') ?>">
 				<i class="fas fa-fw fa-tachometer-alt"></i>
 				<span>Dashboard</span></a>
 		</li>
@@ -25,17 +25,17 @@
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 
-		<li class="nav-item">
+		<li class="nav-item <?= $this->uri->segment(2) == 'data' ? 'active' : '' ?>">
 			<a class="nav-link" href="<?php echo base_url('admin/data') ?>">
 				<i class="fas fa-fw fa-table"></i>
 				<span>Admin </span></a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item <?= $this->uri->segment(2) == 'makeup' ? 'active' : '' ?>">
 			<a class="nav-link" href="<?php echo base_url('admin/makeup') ?>">
 				<i class="fas fa-fw fa-shopping-cart"></i>
 				<span>Make Up </span></a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item <?= $this->uri->segment(2) == 'paket' ? 'active' : '' ?>">
 			<a class="nav-link" href="<?php echo base_url('admin/paket') ?>">
 				<i class="fas fa-fw fa-table"></i>
 				<span>Paket Make Up</span></a>

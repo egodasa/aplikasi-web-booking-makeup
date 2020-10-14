@@ -24,7 +24,10 @@ class Bukti_Model extends CI_Model
 				tb_booking.id_booking Join
 		tb_paket_makeup On tb_booking.id_paket =
 				tb_paket_makeup.id_paket Join
-		tb_kota On tb_booking.id_kota = tb_kota.id_kota")->result();
+		tb_kota On tb_booking.id_kota = 
+				tb_kota.id_kota Join 
+		tb_makeup On tb_paket_makeup.id_makeup = tb_makeup.id_makeup Join
+		tb_pengguna On tb_booking.id_pengguna = tb_pengguna.id_pengguna")->result();
 	}
 
 	public function getById($id)
@@ -37,7 +40,6 @@ class Bukti_Model extends CI_Model
 		$data = [];
 		$data['id_booking'] = $post["id_booking"];
 		$data['nama'] = $post["nama"];
-		$data['no_rekening'] = $post["no_rekening"];
 		$data['bank'] = $post["bank"];
 		$data['bukti_foto'] = $file["bukti_foto"]["name"];
 		if ($data['bukti_foto'] != '') {

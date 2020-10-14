@@ -24,17 +24,26 @@ class Register_Model extends CI_Model
     {
         return $this->db->get_where($this->_table, [$this->primaryKey => $id])->result();
     }
+    
+    public function emailTersedia($email)
+    {
+        return empty($this->db->get_where($this->_table, ["email" => $email])->row());
+    }
 
     public function save($post)
     {
-        $data = [];
-        $data['username'] = $post["username"];
-        $data['password'] = $post["password"];
-        $data['level'] = "Klien";
-        $data['jenis_kelamin'] = $post["jenis_kelamin"];
-        $data['email'] = $post["email"];
-        $data['nohp'] = $post["nohp"];
-        return $this->db->insert($this->_table, $data);
+        if($this->emailTersedia($post['email']))
+        {
+            $data = [];
+            $data['username'] = $post["username"];
+            $data['password'] = $post["password"];
+            $data['level'] = "Klien";
+            $data['jenis_kelamin'] = $post["jenis_kelamin"];
+            $data['email'] = $post["email"];
+            $data['nohp'] = $post["nohp"];
+            return $this->db->insert($this->_table, $data);
+        }
+        return false;
     }
 
     public function update($post, $id)

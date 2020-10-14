@@ -20,6 +20,7 @@ class Paket_Makeup_Model extends CI_Model
         tb_paket_makeup.id_makeup,
         tb_paket_makeup.nm_paket,
         tb_makeup.nm_makeup,
+        tb_makeup.lokasi_makeup,
         tb_paket_makeup.harga_paket,
         tb_paket_makeup.deskripsi,
         tb_paket_makeup.biaya_dp,
@@ -34,7 +35,11 @@ class Paket_Makeup_Model extends CI_Model
 
 	public function getByMakeup($id_makeup)
 	{
-		return $this->db->query("Select * FROM tb_paket_makeup WHERE id_makeup = " . $id_makeup)->result();
+		return $this->db->query("Select 
+									tb_paket_makeup.*,
+									(SELECT COUNT(*) 
+									FROM tb_booking WHERE tb_booking.id_paket = tb_paket_makeup.id_paket AND tb_booking.status IN ('Sudah Bayar DP', 'Sudah Lunas')) AS jumlah_booking 
+									 FROM tb_paket_makeup WHERE tb_paket_makeup.id_makeup = " . $id_makeup)->result();
 	}
 
 	public function getMakeUp()
@@ -50,6 +55,7 @@ class Paket_Makeup_Model extends CI_Model
         tb_paket_makeup.id_makeup,
         tb_paket_makeup.nm_paket,
         tb_makeup.nm_makeup,
+        tb_makeup.lokasi_makeup,
         tb_paket_makeup.harga_paket,
         tb_paket_makeup.deskripsi,
         tb_paket_makeup.biaya_dp,

@@ -8,39 +8,57 @@
 			<tr>
 				<th>Nama Booking</th>
 				<th>Nama Paket</th>
+				<th>Tanggal Booking</th>
+				<th>Tanggal Makeup</th>
 				<th>Harga</th>
 				<th>Tarif</th>
+				<th>Dp</th>
+				<th>Sisa Pembayaran setelah selesai makeup </th>
 				<th>Total Pembayaran</th>
 				<th>Alamat</th>
 				<th>Aksi</th>
 			</tr>
 			<?php foreach ($booking as $bk) : ?>
 				<?php $a = $bk->harga_paket + $bk->tarif ?>
+				<?php $b = $bk->harga_paket + $bk->tarif - $bk->dp ?>
 				<tr>
 					<td><?php echo $bk->nama_booking ?></td>
-					<td><?php echo $bk->nm_paket ?></td>
+					<td><?php echo $bk->nm_paket ?> - <?php echo $bk->nm_makeup ?></td>
+					<td><?php echo date('d-m-Y', strtotime($bk->tgl_booking)) ?></td>
+					<td><?php echo date('d-m-Y', strtotime($bk->tgl_makeup)) ?></td>
 					<td>Rp. <?php echo number_format($bk->harga_paket, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($bk->tarif, '0', ',', '.') ?></td>
+					<td>Rp. <?php echo number_format($bk->dp, '0', ',', '.') ?></td>
+					<td>Rp. <?php echo number_format($b, '0', ',', '.') ?></td>
 					<td>Rp. <?php echo number_format($a, '0', ',', '.') ?></td>
 					<td><?php echo $bk->alamat_booking ?></td>
 					<td>
 						<?php
-						if ($bk->status == "Belum Bayar DP") {
+						if ($bk->hangus == "1") {
 						?>
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lihat<?php echo $bk->id_booking ?>">Silahkan Lakukan Pembayaran</button>
-						<?php } elseif ($bk->status == "Menunggu Konfirmasi") { ?>
-							<div class="alert alert-warning text-center" role="alert">
-								Menunggu Konfirmasi
-							</div>
-						<?php } elseif ($bk->status == "Sudah Lunas") { ?>
-							<div class="alert alert-info text-center" role="alert">
-								Booking Diterima
-							</div>
-						<?php } elseif ($bk->status == "Dibatalkan") { ?>
 							<div class="alert alert-danger text-center" role="alert">
-								Booking Ditolak | Hubungi Kami
+								Transaksi Anda Dibatalkan, karena terlambat waktu pembayaran
 							</div>
-						<?php } ?>
+							<?php
+						} else {
+
+							if ($bk->status == "Belum Bayar DP") {
+							?>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lihat<?php echo $bk->id_booking ?>">Silahkan Lakukan Pembayaran</button>
+							<?php } elseif ($bk->status == "Menunggu Konfirmasi") { ?>
+								<div class="alert alert-warning text-center" role="alert">
+									Menunggu Konfirmasi
+								</div>
+							<?php } elseif ($bk->status == "Sudah Lunas") { ?>
+								<div class="alert alert-info text-center" role="alert">
+									Booking Diterima
+								</div>
+							<?php } elseif ($bk->status == "Dibatalkan") { ?>
+								<div class="alert alert-danger text-center" role="alert">
+									Booking Ditolak | Hubungi Kami
+								</div>
+						<?php }
+						} ?>
 					</td>
 				</tr>
 				<div class="modal fade" id="lihat<?php echo $bk->id_booking ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,15 +78,10 @@
 										<input type="text" name="nama" class="form-control">
 									</div>
 									<div class="form-group">
-										<label for="">No Rekening</label>
-										<input type="text" name="no_rekening" class="form-control">
-									</div>
-									<div class="form-group">
-										<label for="">Bank</label>
+										<label for="">pilih Bank</label>
 										<select name="bank" id="" class="form-control">
-											<option value="BNI">BNI</option>
-											<option value="BRI">BRI</option>
-											<option value="BCA">BCA</option>
+											<option value="BNI">BNI - 0900335784 an/Ratih Wahyuni Islami</option>
+											<option value="BRI">BRI - 7241 01 010515 53 9 an/Ratih Wahyuni Islami</option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -78,6 +91,9 @@
 									<button class="btn btn-primary" type="submit">Simpan Pembayaran</button>
 								</form>
 							</div>
+							<div class="text-center">
+	                     	<h6><i>Batas Pembayaran Dp dalam waktu 12 jam, jika lewat maka booking Hangus dan bisa ulang pemesanan lagi</i></h6>
+                     	</div>
 						</div>
 					</div>
 				</div>

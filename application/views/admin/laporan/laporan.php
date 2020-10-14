@@ -59,33 +59,34 @@
 					<th scope="col">Nama Customers</th>
 					<th scope="col">Paket Makeup</th>
 					<th scope="col">Tanggal Booking</th>
+					<th scope="col">Tanggal Makeup</th>
 					<th scope="col">Total Bayar</th>
 					<th scope="col">Alamat</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$jumlahPendapatan = 0;
-					foreach ($laporan as $no => $lp)
-					{
-						$totalBayar = $lp->tarif + $lp->harga_paket;
-						$jumlahPendapatan += $totalBayar;
+				$jumlahPendapatan = 0;
+				foreach ($laporan as $no => $lp) {
+					$totalBayar = $lp->tarif + $lp->harga_paket;
+					$jumlahPendapatan += $totalBayar;
 				?>
 					<tr>
 						<th scope="row"><?php echo $no + 1; ?></th>
 						<td><?php echo $lp->nama_booking ?></td>
 						<td><?php echo $lp->nm_makeup ?> - <?php echo $lp->nm_paket ?></td>
 						<td><?php echo date('d-m-Y', strtotime($lp->tgl_booking)) ?></td>
+						<td><?php echo date('d-m-Y', strtotime($lp->tgl_makeup)) ?></td>
 						<td>Rp. <?php echo number_format($totalBayar, '0', ',', '.') ?></td>
 						<td><?php echo $lp->alamat_booking ?></td>
 					</tr>
 				<?php
-					}
+				}
 				?>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="4" scope="col">Pendapatan</th>
+					<th colspan="5" scope="col">Pendapatan</th>
 					<th>Rp. <?php
 							if ($jumlahPendapatan == 0) {
 							?>

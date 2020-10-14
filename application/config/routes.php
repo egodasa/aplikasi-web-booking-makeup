@@ -28,7 +28,7 @@ $route['admin/admin_edit/(:num)']['GET'] = 'admin/Admin/admin_edit/$1';
 $route['admin/admin_edit_aksi']['POST'] = 'admin/Admin/admin_edit_aksi';
 $route['admin/admin_hapus/(:num)']['GET'] = 'admin/Admin/admin_hapus_aksi/$1';
 
-$route['admin']['GET'] = 'admin/Dashboard/index';
+$route['admin/dashboard']['GET'] = 'admin/Dashboard/index';
 $route['admin/login']['GET'] = 'admin/Login/login_admin';
 $route['admin/login_aksi']['POST'] = 'admin/Login/login_aksi';
 // $route['admin/logout_aksi']['GET'] = 'admin/Login/logout_aksi';
@@ -50,9 +50,9 @@ $route['admin/paket_hapus/(:num)']['GET'] = 'admin/Paket_Makeup/paket_hapus_aksi
 // Hasil Karya
 $route['admin/karya']['GET'] = 'admin/Hasil_Karya/index';
 $route['admin/karya_tambah']['POST'] = 'admin/Hasil_Karya/karya_tambah';
-$route['admin/karya_edit/(:num)']['GET'] = 'admin/Hasil_karya/karya_edit/$1';
-$route['admin/karya_edit_aksi']['POST'] = 'admin/Hasil_karya/karya_edit_aksi';
-$route['admin/karya_hapus/(:num)']['GET'] = 'admin/Hasil_karya/karya_hapus_aksi/$1';
+$route['admin/karya_edit/(:num)']['GET'] = 'admin/Hasil_Karya/karya_edit/$1';
+$route['admin/karya_edit_aksi']['POST'] = 'admin/Hasil_Karya/karya_edit_aksi';
+$route['admin/karya_hapus/(:num)']['GET'] = 'admin/Hasil_Karya/karya_hapus_aksi/$1';
 
 // Tarif
 $route['admin/tarif']['GET'] = 'admin/Tarif/index';
