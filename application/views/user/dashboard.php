@@ -1,22 +1,22 @@
 <section id="hero" class="d-flex align-items-center" style="height: 80%;">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+	<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row justify-content-center">
-            <!-- <div>
+		<div class="row justify-content-center">
+			<!-- <div>
 				<a href="#pricing">Tarif</a> |
 				<a href="#about">Tentang Kami</a> |
 				<a href="#contact">Kontak Kami</a>
 			</div> -->
-            <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
-                <h1>Selamat Datang</h1>
-                <h2>Ratih MakeUp Arts</h2>
-            </div>
-        </div>
-        <!-- <div class="text-center">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 text-center">
+				<h1>Selamat Datang</h1>
+				<h2>Ratih MakeUp Arts</h2>
+			</div>
+		</div>
+		<!-- <div class="text-center">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
         </div> -->
 
-        <!-- <div class="row icon-boxes">
+		<!-- <div class="row icon-boxes">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-stack-line"></i></div>
@@ -50,78 +50,77 @@
             </div>
 
         </div> -->
-    </div>
+	</div>
 </section>
 <!-- End Hero -->
 
 <main id="main">
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-            <div class="text-center">
-                <h3>Paket Make Up</h3>
-                <hr>
-                <p> Disini kami hadirkan beberapa paket makeup yang mungkin ingin Anda butuhkan.</p>
-            </div>
-        </div>
-    </section><!-- End Cta Section -->
-    <?php foreach ($makeup as $mp) : ?>
-        <section id="pricing" class="pricing">
-            <div class="container" data-aos="fade-up">
+	<!-- ======= Cta Section ======= -->
+	<section id="cta" class="cta">
+		<div class="container" data-aos="zoom-in">
+			<div class="text-center">
+				<h3>Paket Make Up</h3>
+				<hr>
+				<p> Disini kami hadirkan beberapa paket makeup yang mungkin ingin Anda butuhkan.</p>
+			</div>
+		</div>
+	</section><!-- End Cta Section -->
+	<?php foreach ($makeup as $mp) : ?>
+		<section id="pricing" class="pricing">
+			<div class="container" data-aos="fade-up">
 
-                <div class="section-title">
-                    <h2><?= $mp->nm_makeup ?></h2>
-                </div>
+				<div class="section-title">
+					<div class="alert alert-light" role="alert">
+						<h2 style="color: black;"><?= $mp->nm_makeup ?></h2>
+					</div>
+				</div>
 
-                <div class="row">
-                    <?php foreach ($mp->paket as $paket) : ?>
+				<div class="row">
+					<?php foreach ($mp->paket as $paket) : ?>
 
-                        <div class="col-lg-4 col-md-6 mt-4 mt-md-0 mb-5" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="box featured" style="height: 30rem;">
-                                <h1 style="color: white;"><?= $paket->nm_paket ?></h1>
-                                <h4><sup>Rp.</sup><?= number_format($paket->harga_paket, '0', ',', '.') ?></h4>
-                                <?php if ($paket->biaya_dp > 0) { ?>
-                                    <h5 style="color: white;">DP : <sup>Rp.</sup><?= number_format($paket->biaya_dp, '0', ',', '.') ?></h5>
-                                <?php }  ?>
-                                <p style="color: white;">
-                                    <?php
-                                    $list_fitur = explode("<br>", $paket->deskripsi);
-                                    foreach ($list_fitur as $fitur) :
-                                    ?>
-                                        <div style="color: white;"><?= $fitur ?></div>
-                                    <?php endforeach; ?>
-                                </p>
-                                <div class="btn-wrap">
-                                    <p style="color: white;">
-                                        <?php
-                                            if($paket->jumlah_booking == 0)
-                                            {
-                                        ?>
-                                                Belum Pernah Dibooking
-                                        <?php
-                                            }
-                                            else
-                                            {
-                                        ?>
-                                            Sudah Dibooking Sebanyak <?=$paket->jumlah_booking?> Kali
-                                        <?php
-                                            }
-                                        ?>
-                                    </p>
-                                    <a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+						<div class="col-lg-4 col-md-6 mt-4 mt-md-0 mb-5" data-aos="zoom-in" data-aos-delay="100">
+							<div class="box" style="height: 30rem;">
+								<h1 style="color: black;"><?= $paket->nm_paket ?></h1>
+								<h4><sup>Rp.</sup><?= number_format($paket->harga_paket, '0', ',', '.') ?></h4>
+								<?php if ($paket->biaya_dp > 0) { ?>
+									<h5 style="color: black;">DP : <sup>Rp.</sup><?= number_format($paket->biaya_dp, '0', ',', '.') ?></h5>
+								<?php }  ?>
+								<p style="color: black;">
+									<?php
+									$list_fitur = explode("<br>", $paket->deskripsi);
+									foreach ($list_fitur as $fitur) :
+									?>
+										<div style="color: black;"><?= $fitur ?></div>
+									<?php endforeach; ?>
+								</p>
+								<div class="btn-wrap">
+									<p style="color: black;">
+										<?php
+										if ($paket->jumlah_booking == 0) {
+										?>
+											Belum Pernah Dibooking
+										<?php
+										} else {
+										?>
+											Sudah Dibooking Sebanyak <?= $paket->jumlah_booking ?> Kali
+										<?php
+										}
+										?>
+									</p>
+									<a href="<?php echo base_url('booking/') . $paket->id_paket ?>" class="btn-buy">Pesan</a>
+								</div>
+							</div>
+						</div>
+					<?php endforeach; ?>
 
-                </div>
+				</div>
 
-            </div>
-        </section><!-- End Pricing Section -->
+			</div>
+		</section><!-- End Pricing Section -->
 
-    <?php endforeach; ?>
-    <!-- ======= About Section ======= -->
-    <!-- <section class="about">
+	<?php endforeach; ?>
+	<!-- ======= About Section ======= -->
+	<!-- <section class="about">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -153,10 +152,10 @@
 
         </div>
     </section> -->
-    <!-- End About Section -->
+	<!-- End About Section -->
 
-    <!-- ======= Counts Section ======= -->
-    <!-- <section id="counts" class="counts section-bg">
+	<!-- ======= Counts Section ======= -->
+	<!-- <section id="counts" class="counts section-bg">
         <div class="container">
 
             <div class="row justify-content-end">
@@ -193,11 +192,11 @@
 
         </div>
     </section> -->
-    <!-- End Counts Section -->
+	<!-- End Counts Section -->
 
 
-    <!-- ======= Clients Section ======= -->
-    <!-- <section id="clients" class="clients section-bg">
+	<!-- ======= Clients Section ======= -->
+	<!-- <section id="clients" class="clients section-bg">
         <div class="container">
 
             <div class="row">
@@ -231,8 +230,8 @@
         </div>
     </section>End Clients Section -->
 
-    <!-- ======= Testimonials Section ======= -->
-    <!-- <section id="testimonials" class="testimonials">
+	<!-- ======= Testimonials Section ======= -->
+	<!-- <section id="testimonials" class="testimonials">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -302,8 +301,8 @@
         </div>
     </section>End Testimonials Section -->
 
-    <!-- ======= Services Section ======= -->
-    <!-- <section id="services" class="services section-bg">
+	<!-- ======= Services Section ======= -->
+	<!-- <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -419,13 +418,13 @@
 
         </div>
     </section> -->
-    <!-- End Sevices Section -->
+	<!-- End Sevices Section -->
 
-    <!-- ======= Portfolio Section ======= -->
+	<!-- ======= Portfolio Section ======= -->
 
 
-    <!-- ======= Team Section ======= -->
-    <!-- <section id="team" class="team section-bg">
+	<!-- ======= Team Section ======= -->
+	<!-- <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -512,8 +511,8 @@
         </div>
     </section>End Team Section -->
 
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <!-- <section id="faq" class="faq section-bg">
+	<!-- ======= Frequently Asked Questions Section ======= -->
+	<!-- <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -573,7 +572,7 @@
 
         </div>
     </section> -->
-    <!-- End Frequently Asked Questions Section -->
+	<!-- End Frequently Asked Questions Section -->
 
 
 </main><!-- End #main -->
