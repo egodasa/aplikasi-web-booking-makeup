@@ -104,31 +104,48 @@ class Dashboard extends MY_Controller
 
 	public function register_tambah()
 	{
-		if($this->registerModel->save($_POST))
-		{
-		    $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		// if ($this->registerModel->usernameTersedia($_POST['username'])) {
+		// 	$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		//         Username sudah pernah digunakan. Silahkan gunakan username lain...
+		//         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		//           <span aria-hidden="true">&times;</span>
+		//         </button>
+		//       </div>');
+		// 	$this->register();
+		// }
+
+		// if ($this->registerModel->emailTersedia($_POST['email'])) {
+		// 	$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		//         Email sudah pernah digunakan. Silahkan gunakan email lain...
+		//         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		//           <span aria-hidden="true">&times;</span>
+		//         </button>
+		//       </div>');
+		// 	$this->register();
+		// }
+		$this->_rules();
+		if ($this->form_validation->run() == FALSE) {
+			$this->register();
+		} else {
+			$this->registerModel->save($_POST);
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 Berhasil Melakukan Register
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-              </div>');   
-            redirect('register');
-		}
-		else
-		{
-		    $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Email sudah pernah digunakan. Silahkan gunakan email lain...
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>');
-            $this->register();
+			$this->register();
 		}
-		
 	}
 
 	public function biodata()
 	{
 		$this->view_frontend('user/biodata');
+	}
+
+	public function _rules()
+	{
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[tb_pengguna.username]');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tb_pengguna.email]');
 	}
 }
